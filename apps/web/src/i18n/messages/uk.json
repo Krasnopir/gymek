@@ -32,19 +32,61 @@
   },
   "dashboard": {
     "today": "Сьогодні",
-    "noWorkout": "На сьогодні плану немає. Йди в тренування.",
-    "openTraining": "До тренування"
+    "noWorkout": "На сьогодні плану немає.",
+    "openTraining": "До тренування",
+    "weight": "Вага",
+    "calories": "Калорії",
+    "protein": "Білок",
+    "sleep": "Сон",
+    "gymekWord": "Слово від Gymek",
+    "generateSummary": "Вечірній розбір",
+    "checkinTitle": "Чек-ін",
+    "saveCheckin": "Зберегти чек-ін",
+    "mood": "Настрій",
+    "stress": "Стрес",
+    "sleepHours": "Сон (години)"
   },
   "training": {
     "title": "Тренування",
     "todayPlan": "План на сьогодні",
+    "calendar": "Календар",
     "complete": "Завершити",
     "skip": "Скіпнути",
     "statusCompleted": "Зроблено",
     "statusSkipped": "Скіп",
     "statusPlanned": "Заплановано",
     "goblinHint": "Слово від Gymek",
-    "seedPlan": "Згенерити план на сьогодні",
-    "loading": "Вантажу план…"
+    "seedPlan": "AI: план на сьогодні",
+    "loading": "Вантажу…",
+    "nextPlanReady": "План на завтра готовий"
+  },
+  "nutrition": {
+    "title": "Харчування",
+    "addMeal": "Додати",
+    "describeMeal": "Що з'їв? (AI порахує)",
+    "estimate": "Оцінити AI",
+    "saveMeal": "Зберегти",
+    "totals": "Разом за день",
+    "calories": "ккал",
+    "protein": "білок",
+    "carbs": "вуглеводи",
+    "fats": "жири",
+    "empty": "Поки пусто.",
+    "delete": "Видалити"
+  },
+  "progress": {
+    "title": "Прогрес",
+    "weightToday": "Вага сьогодні (кг)",
+    "saveWeight": "Зберегти вагу",
+    "history": "Історія ваги",
+    "photo": "Фото в дзеркалі",
+    "uploadPhoto": "Завантажити фото",
+    "noMetrics": "Даних по вазі ще немає"
+  },
+  "common": {
+    "kg": "кг",
+    "save": "Зберегти",
+    "loading": "Вантажу…",
+    "error": "Щось пішло не так"
   }
 }

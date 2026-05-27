@@ -1,6 +1,6 @@
 {
   "app": {
-    "tagline": "Adaptacyjny AI coach. Bez wellnessowego cringe.",
+    "tagline": "Adaptacyjny AI coach. Bez wellness cringe.",
     "checkingSession": "Sprawdzam sesję…"
   },
   "auth": {
@@ -32,19 +32,61 @@
   },
   "dashboard": {
     "today": "Dziś",
-    "noWorkout": "Brak planu na dziś. Wejdź w trening.",
-    "openTraining": "Otwórz trening"
+    "noWorkout": "Brak planu na dziś.",
+    "openTraining": "Otwórz trening",
+    "weight": "Waga",
+    "calories": "Kalorie",
+    "protein": "Białko",
+    "sleep": "Sen",
+    "gymekWord": "Słowo od Gymek",
+    "generateSummary": "Podsumowanie wieczorne",
+    "checkinTitle": "Check-in",
+    "saveCheckin": "Zapisz check-in",
+    "mood": "Nastrój",
+    "stress": "Stres",
+    "sleepHours": "Sen (godziny)"
   },
   "training": {
     "title": "Trening",
     "todayPlan": "Plan na dziś",
+    "calendar": "Kalendarz",
     "complete": "Ukończ",
     "skip": "Pomiń",
     "statusCompleted": "Zrobione",
     "statusSkipped": "Pominięte",
     "statusPlanned": "Zaplanowane",
     "goblinHint": "Słowo od Gymek",
-    "seedPlan": "Wygeneruj plan na dziś",
-    "loading": "Ładuję plan…"
+    "seedPlan": "AI: plan na dziś",
+    "loading": "Ładuję…",
+    "nextPlanReady": "Plan na jutro gotowy"
+  },
+  "nutrition": {
+    "title": "Dieta",
+    "addMeal": "Dodaj",
+    "describeMeal": "Co zjadłeś? (AI policzy)",
+    "estimate": "Oceń AI",
+    "saveMeal": "Zapisz posiłek",
+    "totals": "Suma dnia",
+    "calories": "kcal",
+    "protein": "białko",
+    "carbs": "węgle",
+    "fats": "tłuszcze",
+    "empty": "Na razie pusto.",
+    "delete": "Usuń"
+  },
+  "progress": {
+    "title": "Postęp",
+    "weightToday": "Waga dziś (kg)",
+    "saveWeight": "Zapisz wagę",
+    "history": "Historia wagi",
+    "photo": "Zdjęcie w lustrze",
+    "uploadPhoto": "Wgraj zdjęcie",
+    "noMetrics": "Brak danych o wadze"
+  },
+  "common": {
+    "kg": "kg",
+    "save": "Zapisz",
+    "loading": "Ładuję…",
+    "error": "Coś poszło nie tak"
   }
 }

@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { WeekCalendar } from "@/components/training/week-calendar";
 import { useMessages } from "@/features/i18n/use-messages";
+import { useCalendarPlans } from "@/features/training/use-calendar-plans";
 import { useTodayWorkout, useWorkoutActions } from "@/features/training/use-today-workout";
 
 export const Route = createFileRoute("/dashboard/training")({
@@ -9,7 +12,9 @@ export const Route = createFileRoute("/dashboard/training")({
 function TrainingPage() {
   const t = useMessages();
   const { data: plan, isLoading } = useTodayWorkout();
+  const { data: calendar } = useCalendarPlans();
   const { seedMutation, sessionMutation } = useWorkoutActions();
+  const [nextPlanNote, setNextPlanNote] = useState<string | null>(null);
 
   const statusLabel =
     plan?.status === "completed"
@@ -21,6 +26,11 @@ function TrainingPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold">{t.training.title}</h1>
+
+      <section className="space-y-2">
+        <h2 className="text-sm font-medium text-zinc-400">{t.training.calendar}</h2>
+        <WeekCalendar plans={calendar?.plans ?? []} />
+      </section>
 
       {isLoading ? <p className="text-sm text-zinc-500">{t.training.loading}</p> : null}
 
@@ -46,7 +56,8 @@ function TrainingPage() {
             </div>
             {plan.ai_note ? (
               <p className="mt-3 text-sm text-zinc-400">
-                <span className="font-medium text-zinc-200">{t.training.goblinHint}:</span> {plan.ai_note}
+                <span className="font-medium text-zinc-200">{t.training.goblinHint}:</span>{" "}
+                {plan.ai_note}
               </p>
             ) : null}
           </div>
@@ -74,10 +85,15 @@ function TrainingPage() {
                 className="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-black disabled:opacity-60"
                 disabled={sessionMutation.isPending}
                 onClick={() =>
-                  sessionMutation.mutate({
-                    workoutPlanId: plan.id,
-                    status: "completed",
-                  })
+                  sessionMutation.mutate(
+                    { workoutPlanId: plan.id, status: "completed" },
+                    {
+                      onSuccess: (data) => {
+                        const next = (data as { nextPlan?: { focus?: string } }).nextPlan;
+                        setNextPlanNote(next?.focus ? `${t.training.nextPlanReady}: ${next.focus}` : t.training.nextPlanReady);
+                      },
+                    },
+                  )
                 }
                 type="button"
               >
@@ -87,10 +103,15 @@ function TrainingPage() {
                 className="rounded-lg border border-zinc-700 px-4 py-2 text-sm disabled:opacity-60"
                 disabled={sessionMutation.isPending}
                 onClick={() =>
-                  sessionMutation.mutate({
-                    workoutPlanId: plan.id,
-                    status: "skipped",
-                  })
+                  sessionMutation.mutate(
+                    { workoutPlanId: plan.id, status: "skipped" },
+                    {
+                      onSuccess: (data) => {
+                        const next = (data as { nextPlan?: { focus?: string } }).nextPlan;
+                        setNextPlanNote(next?.focus ? `${t.training.nextPlanReady}: ${next.focus}` : t.training.nextPlanReady);
+                      },
+                    },
+                  )
                 }
                 type="button"
               >
@@ -98,6 +119,8 @@ function TrainingPage() {
               </button>
             </div>
           ) : null}
+
+          {nextPlanNote ? <p className="text-sm text-emerald-400">{nextPlanNote}</p> : null}
         </div>
       ) : null}
     </div>

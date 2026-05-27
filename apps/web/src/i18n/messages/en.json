@@ -32,19 +32,61 @@
   },
   "dashboard": {
     "today": "Today",
-    "noWorkout": "No plan for today. Open training to generate one.",
-    "openTraining": "Open training"
+    "noWorkout": "No plan for today.",
+    "openTraining": "Open training",
+    "weight": "Weight",
+    "calories": "Calories",
+    "protein": "Protein",
+    "sleep": "Sleep",
+    "gymekWord": "Word from Gymek",
+    "generateSummary": "Evening summary",
+    "checkinTitle": "Check-in",
+    "saveCheckin": "Save check-in",
+    "mood": "Mood",
+    "stress": "Stress",
+    "sleepHours": "Sleep (hours)"
   },
   "training": {
     "title": "Training",
     "todayPlan": "Today's plan",
+    "calendar": "Calendar",
     "complete": "Complete",
     "skip": "Skip",
     "statusCompleted": "Done",
     "statusSkipped": "Skipped",
     "statusPlanned": "Planned",
     "goblinHint": "Word from Gymek",
-    "seedPlan": "Generate today's plan",
-    "loading": "Loading plan…"
+    "seedPlan": "AI: today's plan",
+    "loading": "Loading…",
+    "nextPlanReady": "Tomorrow's plan is ready"
+  },
+  "nutrition": {
+    "title": "Nutrition",
+    "addMeal": "Add",
+    "describeMeal": "What did you eat? (AI estimates)",
+    "estimate": "AI estimate",
+    "saveMeal": "Save meal",
+    "totals": "Daily totals",
+    "calories": "kcal",
+    "protein": "protein",
+    "carbs": "carbs",
+    "fats": "fats",
+    "empty": "Nothing logged yet.",
+    "delete": "Delete"
+  },
+  "progress": {
+    "title": "Progress",
+    "weightToday": "Today's weight (kg)",
+    "saveWeight": "Save weight",
+    "history": "Weight history",
+    "photo": "Mirror photo",
+    "uploadPhoto": "Upload photo",
+    "noMetrics": "No weight data yet"
+  },
+  "common": {
+    "kg": "kg",
+    "save": "Save",
+    "loading": "Loading…",
+    "error": "Something went wrong"
   }
 }

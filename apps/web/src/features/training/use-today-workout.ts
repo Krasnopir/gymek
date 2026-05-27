@@ -44,6 +44,8 @@ export const useWorkoutActions = () => {
 
   const invalidate = () => {
     void queryClient.invalidateQueries({ queryKey: ["workout-today", userId] });
+    void queryClient.invalidateQueries({ queryKey: ["calendar-plans", userId] });
+    void queryClient.invalidateQueries({ queryKey: ["dashboard-summary", userId] });
   };
 
   const seedMutation = useMutation({

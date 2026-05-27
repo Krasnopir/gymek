@@ -32,19 +32,61 @@
   },
   "dashboard": {
     "today": "Сегодня",
-    "noWorkout": "На сегодня плана нет. Жми в тренировки — сгенерим.",
-    "openTraining": "К тренировке"
+    "noWorkout": "На сегодня плана нет.",
+    "openTraining": "К тренировке",
+    "weight": "Вес",
+    "calories": "Калории",
+    "protein": "Белок",
+    "sleep": "Сон",
+    "gymekWord": "Слово от Gymek",
+    "generateSummary": "Вечерний разбор",
+    "checkinTitle": "Чек-ин",
+    "saveCheckin": "Сохранить чек-ин",
+    "mood": "Настроение",
+    "stress": "Стресс",
+    "sleepHours": "Сон (часы)"
   },
   "training": {
     "title": "Тренировки",
     "todayPlan": "План на сегодня",
+    "calendar": "Календарь",
     "complete": "Завершить",
     "skip": "Скипнуть",
     "statusCompleted": "Сделано",
     "statusSkipped": "Скип",
     "statusPlanned": "Запланировано",
     "goblinHint": "Слово от Gymek",
-    "seedPlan": "Сгенерить план на сегодня",
-    "loading": "Гружу план…"
+    "seedPlan": "AI: план на сегодня",
+    "loading": "Гружу…",
+    "nextPlanReady": "План на завтра готов"
+  },
+  "nutrition": {
+    "title": "Питание",
+    "addMeal": "Добавить",
+    "describeMeal": "Что съел? (AI посчитает)",
+    "estimate": "Оценить AI",
+    "saveMeal": "Сохранить",
+    "totals": "Итого за день",
+    "calories": "ккал",
+    "protein": "белок",
+    "carbs": "угли",
+    "fats": "жиры",
+    "empty": "Пока пусто. Жрать надо, бро.",
+    "delete": "Удалить"
+  },
+  "progress": {
+    "title": "Прогресс",
+    "weightToday": "Вес сегодня (кг)",
+    "saveWeight": "Сохранить вес",
+    "history": "История веса",
+    "photo": "Фото в зеркале",
+    "uploadPhoto": "Загрузить фото",
+    "noMetrics": "Весов пока нет"
+  },
+  "common": {
+    "kg": "кг",
+    "save": "Сохранить",
+    "loading": "Гружу…",
+    "error": "Что-то пошло по пизде"
   }
 }

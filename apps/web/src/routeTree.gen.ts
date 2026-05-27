@@ -13,6 +13,8 @@ import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardTrainingRouteImport } from './routes/dashboard/training'
+import { Route as DashboardProgressRouteImport } from './routes/dashboard/progress'
+import { Route as DashboardNutritionRouteImport } from './routes/dashboard/nutrition'
 
 const DashboardRouteRoute = DashboardRouteRouteImport.update({
   id: '/dashboard',
@@ -34,15 +36,29 @@ const DashboardTrainingRoute = DashboardTrainingRouteImport.update({
   path: '/training',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
+const DashboardProgressRoute = DashboardProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+const DashboardNutritionRoute = DashboardNutritionRouteImport.update({
+  id: '/nutrition',
+  path: '/nutrition',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/dashboard/nutrition': typeof DashboardNutritionRoute
+  '/dashboard/progress': typeof DashboardProgressRoute
   '/dashboard/training': typeof DashboardTrainingRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard/nutrition': typeof DashboardNutritionRoute
+  '/dashboard/progress': typeof DashboardProgressRoute
   '/dashboard/training': typeof DashboardTrainingRoute
   '/dashboard': typeof DashboardIndexRoute
 }
@@ -50,15 +66,35 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
+  '/dashboard/nutrition': typeof DashboardNutritionRoute
+  '/dashboard/progress': typeof DashboardProgressRoute
   '/dashboard/training': typeof DashboardTrainingRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/dashboard/training' | '/dashboard/'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/dashboard/nutrition'
+    | '/dashboard/progress'
+    | '/dashboard/training'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard/training' | '/dashboard'
-  id: '__root__' | '/' | '/dashboard' | '/dashboard/training' | '/dashboard/'
+  to:
+    | '/'
+    | '/dashboard/nutrition'
+    | '/dashboard/progress'
+    | '/dashboard/training'
+    | '/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/dashboard/nutrition'
+    | '/dashboard/progress'
+    | '/dashboard/training'
+    | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -96,15 +132,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardTrainingRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
+    '/dashboard/progress': {
+      id: '/dashboard/progress'
+      path: '/progress'
+      fullPath: '/dashboard/progress'
+      preLoaderRoute: typeof DashboardProgressRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
+    '/dashboard/nutrition': {
+      id: '/dashboard/nutrition'
+      path: '/nutrition'
+      fullPath: '/dashboard/nutrition'
+      preLoaderRoute: typeof DashboardNutritionRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
   }
 }
 
 interface DashboardRouteRouteChildren {
+  DashboardNutritionRoute: typeof DashboardNutritionRoute
+  DashboardProgressRoute: typeof DashboardProgressRoute
   DashboardTrainingRoute: typeof DashboardTrainingRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
+  DashboardNutritionRoute: DashboardNutritionRoute,
+  DashboardProgressRoute: DashboardProgressRoute,
   DashboardTrainingRoute: DashboardTrainingRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }

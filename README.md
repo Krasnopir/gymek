@@ -65,7 +65,23 @@ Production target: **Render** (web + api).
 
 Quick: Render Dashboard → **New Blueprint** → repo `Krasnopir/gymek` → fill secrets → deploy API → deploy web → set `APP_BASE_URL` on API.
 
-## Current status
+## Current status (v1 functional)
 
-- Bootstrap complete for monorepo, auth baseline, and onboarding persistence.
-- Next implementation pass: calendar UX, workout planner flows, nutrition photo analysis pipeline, AI memory jobs.
+- Google auth + onboarding (ru/uk/en/pl)
+- Dashboard: вес, калории, белок, сон, чек-ин, вечерний AI summary
+- Training: AI план на сегодня, календарь 14 дней, complete/skip + AI план на завтра
+- Nutrition: AI оценка еды по тексту, дневной лог
+- Progress: вес + график, загрузка progress-фото в Supabase Storage
+- API: OpenAI (`gpt-4o-mini`) + fallback шаблоны
+
+### Local run
+
+```bash
+pnpm dev
+```
+
+### Still optional later
+
+- Render deploy (когда скажешь)
+- Nutrition photo vision (сейчас текст)
+- Achievements / heatmap polish

@@ -5,7 +5,12 @@ import helmet from "helmet";
 import { ZodError } from "zod";
 import { corsOrigins, env, listenPort } from "./env.js";
 import { healthRouter } from "./routes/health.js";
+import { aiRouter } from "./routes/ai.js";
+import { checkinsRouter } from "./routes/checkins.js";
+import { dashboardRouter } from "./routes/dashboard.js";
+import { nutritionRouter } from "./routes/nutrition.js";
 import { profileRouter } from "./routes/profile.js";
+import { progressRouter } from "./routes/progress.js";
 import { workoutsRouter } from "./routes/workouts.js";
 
 const app = express();
@@ -34,6 +39,11 @@ app.get("/", (_req, res) => {
 app.use("/health", healthRouter);
 app.use("/profile", profileRouter);
 app.use("/workouts", workoutsRouter);
+app.use("/nutrition", nutritionRouter);
+app.use("/progress", progressRouter);
+app.use("/checkins", checkinsRouter);
+app.use("/ai", aiRouter);
+app.use("/dashboard", dashboardRouter);
 
 app.use((error: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   if (error instanceof ZodError) {
