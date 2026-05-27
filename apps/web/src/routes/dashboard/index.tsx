@@ -4,6 +4,7 @@ import { useGenerateSummary, useDailySummary } from "@/features/ai/use-daily-sum
 import { useCheckinActions, useCheckinToday } from "@/features/checkins/use-checkin";
 import { useDashboardSummary } from "@/features/dashboard/use-dashboard-summary";
 import { useMessages } from "@/features/i18n/use-messages";
+import { useAppToast } from "@/features/toast/use-app-toast";
 
 export const Route = createFileRoute("/dashboard/")({
   component: DashboardHome,
@@ -11,6 +12,7 @@ export const Route = createFileRoute("/dashboard/")({
 
 function DashboardHome() {
   const t = useMessages();
+  const toast = useAppToast();
   const { data, isLoading } = useDashboardSummary();
   const { data: checkinData } = useCheckinToday();
   const checkinMutation = useCheckinActions();
@@ -127,7 +129,13 @@ function DashboardHome() {
           className="mt-3 rounded-lg border border-zinc-700 px-4 py-2 text-sm"
           disabled={checkinMutation.isPending}
           onClick={() =>
-            checkinMutation.mutate({ moodScore: mood, stressScore: stress, sleepHours })
+            checkinMutation.mutate(
+              { moodScore: mood, stressScore: stress, sleepHours },
+              {
+                onSuccess: () => toast.success(t.toast.checkinSaved),
+                onError: (error) => toast.error(error),
+              },
+            )
           }
           type="button"
         >
@@ -141,7 +149,12 @@ function DashboardHome() {
           <button
             className="rounded-lg border border-zinc-700 px-3 py-1 text-xs"
             disabled={generateSummary.isPending}
-            onClick={() => generateSummary.mutate()}
+            onClick={() =>
+              generateSummary.mutate(undefined, {
+                onSuccess: () => toast.success(t.toast.summaryGenerated),
+                onError: (error) => toast.error(error),
+              })
+            }
             type="button"
           >
             {t.dashboard.generateSummary}

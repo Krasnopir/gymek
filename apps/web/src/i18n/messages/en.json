@@ -88,5 +88,34 @@
     "save": "Save",
     "loading": "Loading…",
     "error": "Something went wrong"
+  },
+  "errors": {
+    "unknown": "Something went wrong. Try again.",
+    "network": "API is not responding ({{api}}). Run: pnpm dev:api",
+    "cors": "CORS blocked. Set APP_BASE_URL in apps/api/.env to your frontend URL.",
+    "validation": "Check the form — invalid input.",
+    "profileNotFound": "Profile not found. Complete onboarding again.",
+    "profileSaveFailed": "Could not save profile. Check API and Supabase service_role.",
+    "database": "Supabase database error. Check API logs.",
+    "duplicate": "This record already exists.",
+    "forbidden": "You do not have access to this data.",
+    "aiUnavailable": "AI is unavailable. Try again later.",
+    "server": "Server error. Check API logs.",
+    "apiDown": "API is down.",
+    "notAuthenticated": "Sign in with Google first.",
+    "authFailed": "Google sign-in failed. Check Supabase Auth settings."
+  },
+  "toast": {
+    "profileSaved": "Profile saved.",
+    "checkinSaved": "Check-in saved.",
+    "weightSaved": "Weight saved.",
+    "mealSaved": "Meal logged.",
+    "mealDeleted": "Removed.",
+    "workoutCompleted": "Workout completed.",
+    "workoutSkipped": "Workout skipped.",
+    "planGenerated": "Plan ready.",
+    "summaryGenerated": "Evening summary ready.",
+    "photoUploaded": "Photo uploaded.",
+    "signedOut": "Signed out."
   }
 }

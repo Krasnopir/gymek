@@ -5,11 +5,13 @@ import { signInWithGoogle } from "@/features/auth/auth-actions";
 import { useAuth } from "@/features/auth/auth-provider";
 import { useMessages } from "@/features/i18n/use-messages";
 import { useProfile } from "@/features/profile/use-profile";
+import { useAppToast } from "@/features/toast/use-app-toast";
 
 export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
   const t = useMessages();
+  const toast = useAppToast();
   const navigate = useNavigate();
   const { isAuthenticated, isLoading, session } = useAuth();
   const { data: profile, isLoading: profileLoading } = useProfile();
@@ -21,9 +23,13 @@ function Home() {
   }, [isAuthenticated, profile?.onboarding_completed, navigate]);
 
   const handleSignIn = async () => {
-    await signInWithGoogle({
-      redirectTo: window.location.origin,
-    });
+    try {
+      await signInWithGoogle({
+        redirectTo: window.location.origin,
+      });
+    } catch (error) {
+      toast.error(error instanceof Error ? error : new Error(t.errors.authFailed));
+    }
   };
 
   const showOnboarding = isAuthenticated && !profileLoading && !profile?.onboarding_completed;

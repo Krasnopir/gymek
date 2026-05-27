@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { useMessages } from "@/features/i18n/use-messages";
+import { useAppToast } from "@/features/toast/use-app-toast";
 import { useProgressActions, useProgressMetrics } from "@/features/progress/use-progress";
 
 export const Route = createFileRoute("/dashboard/progress")({
@@ -9,6 +10,7 @@ export const Route = createFileRoute("/dashboard/progress")({
 
 function ProgressPage() {
   const t = useMessages();
+  const toast = useAppToast();
   const { data, isLoading } = useProgressMetrics();
   const { saveWeightMutation, uploadPhotoMutation } = useProgressActions();
   const [weight, setWeight] = useState("");
@@ -37,7 +39,12 @@ function ProgressPage() {
           <button
             className="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-black"
             disabled={saveWeightMutation.isPending || !weight}
-            onClick={() => saveWeightMutation.mutate(Number(weight))}
+            onClick={() =>
+              saveWeightMutation.mutate(Number(weight), {
+                onSuccess: () => toast.success(t.toast.weightSaved),
+                onError: (error) => toast.error(error),
+              })
+            }
             type="button"
           >
             {t.progress.saveWeight}
@@ -75,7 +82,10 @@ function ProgressPage() {
           onChange={(e) => {
             const file = e.target.files?.[0];
             if (file) {
-              uploadPhotoMutation.mutate(file);
+              uploadPhotoMutation.mutate(file, {
+                onSuccess: () => toast.success(t.toast.photoUploaded),
+                onError: (error) => toast.error(error),
+              });
             }
           }}
           type="file"

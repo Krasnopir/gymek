@@ -88,5 +88,34 @@
     "save": "Zapisz",
     "loading": "Ładuję…",
     "error": "Coś poszło nie tak"
+  },
+  "errors": {
+    "unknown": "Coś poszło nie tak. Spróbuj ponownie.",
+    "network": "API nie odpowiada ({{api}}). Uruchom: pnpm dev:api",
+    "cors": "CORS: ustaw APP_BASE_URL w apps/api/.env na URL frontendu.",
+    "validation": "Sprawdź formularz — nieprawidłowe dane.",
+    "profileNotFound": "Nie znaleziono profilu. Ukończ onboarding ponownie.",
+    "profileSaveFailed": "Nie udało się zapisać profilu. Sprawdź API i Supabase service_role.",
+    "database": "Błąd bazy Supabase.",
+    "duplicate": "Taki rekord już istnieje.",
+    "forbidden": "Brak dostępu do tych danych.",
+    "aiUnavailable": "AI niedostępne. Spróbuj później.",
+    "server": "Błąd serwera.",
+    "apiDown": "API niedostępne.",
+    "notAuthenticated": "Najpierw zaloguj się przez Google.",
+    "authFailed": "Logowanie Google nie powiodło się."
+  },
+  "toast": {
+    "profileSaved": "Profil zapisany.",
+    "checkinSaved": "Check-in zapisany.",
+    "weightSaved": "Waga zapisana.",
+    "mealSaved": "Posiłek dodany.",
+    "mealDeleted": "Usunięto.",
+    "workoutCompleted": "Trening ukończony.",
+    "workoutSkipped": "Trening pominięty.",
+    "planGenerated": "Plan gotowy.",
+    "summaryGenerated": "Podsumowanie gotowe.",
+    "photoUploaded": "Zdjęcie wgrane.",
+    "signedOut": "Wylogowano."
   }
 }

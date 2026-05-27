@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { z } from "zod";
+import { HttpError, mapSupabaseError } from "../lib/http-error.js";
 import { supabaseAdmin } from "../supabase.js";
 
 const upsertProfileSchema = z.object({
@@ -22,11 +23,14 @@ profileRouter.get("/:userId", async (req, res, next) => {
       .maybeSingle();
 
     if (error) {
-      throw error;
+      throw mapSupabaseError(error);
     }
 
     if (!data) {
-      return res.status(404).json({ error: "PROFILE_NOT_FOUND" });
+      return res.status(404).json({
+        error: "PROFILE_NOT_FOUND",
+        message: "Профиль не найден. Пройди onboarding заново.",
+      });
     }
 
     res.json({ profile: data });
@@ -56,11 +60,15 @@ profileRouter.post("/upsert", async (req, res, next) => {
       .single();
 
     if (error) {
-      throw error;
+      throw mapSupabaseError(error);
     }
 
     res.json({ profile: data });
   } catch (error) {
+    if (error instanceof Error && error.message.includes("fetch")) {
+      next(new HttpError(503, "API_UNAVAILABLE", "API недоступен"));
+      return;
+    }
     next(error);
   }
 });

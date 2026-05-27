@@ -87,6 +87,35 @@
     "kg": "кг",
     "save": "Сохранить",
     "loading": "Гружу…",
-    "error": "Что-то пошло по пизде"
+    "error": "Что-то пошло не так"
+  },
+  "errors": {
+    "unknown": "Что-то пошло не так. Попробуй ещё раз.",
+    "network": "API не отвечает ({{api}}). Запусти: pnpm dev:api",
+    "cors": "CORS: в apps/api/.env укажи APP_BASE_URL как URL фронта (порт из консоли Vite).",
+    "validation": "Проверь поля формы — что-то заполнено криво.",
+    "profileNotFound": "Профиль не найден. Сохрани onboarding ещё раз.",
+    "profileSaveFailed": "Профиль не сохранился. Проверь API и Supabase service_role.",
+    "database": "Ошибка базы Supabase. Смотри логи API.",
+    "duplicate": "Такая запись уже есть.",
+    "forbidden": "Нет доступа к этим данным.",
+    "aiUnavailable": "AI лёг. Повтори позже — шаблоны всё равно работают.",
+    "server": "Ошибка на сервере. Логи API подскажут.",
+    "apiDown": "API недоступен.",
+    "notAuthenticated": "Сначала войди через Google.",
+    "authFailed": "Google login не взлетел. Проверь Supabase → Auth → Google."
+  },
+  "toast": {
+    "profileSaved": "Профиль сохранён. Погнали.",
+    "checkinSaved": "Чек-ин записан.",
+    "weightSaved": "Вес сохранён.",
+    "mealSaved": "Приём пищи добавлен.",
+    "mealDeleted": "Удалено.",
+    "workoutCompleted": "Тренировка в копилку. Красава.",
+    "workoutSkipped": "Скип зафиксирован. Gymek помнит.",
+    "planGenerated": "План готов.",
+    "summaryGenerated": "Вечерний разбор готов.",
+    "photoUploaded": "Фото залито.",
+    "signedOut": "Вышел. До связи."
   }
 }

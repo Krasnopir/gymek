@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { WeekCalendar } from "@/components/training/week-calendar";
 import { useMessages } from "@/features/i18n/use-messages";
+import { useAppToast } from "@/features/toast/use-app-toast";
 import { useCalendarPlans } from "@/features/training/use-calendar-plans";
 import { useTodayWorkout, useWorkoutActions } from "@/features/training/use-today-workout";
 
@@ -11,6 +12,7 @@ export const Route = createFileRoute("/dashboard/training")({
 
 function TrainingPage() {
   const t = useMessages();
+  const toast = useAppToast();
   const { data: plan, isLoading } = useTodayWorkout();
   const { data: calendar } = useCalendarPlans();
   const { seedMutation, sessionMutation } = useWorkoutActions();
@@ -38,7 +40,12 @@ function TrainingPage() {
         <button
           className="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-black disabled:opacity-60"
           disabled={seedMutation.isPending}
-          onClick={() => seedMutation.mutate()}
+          onClick={() =>
+            seedMutation.mutate(undefined, {
+              onSuccess: () => toast.success(t.toast.planGenerated),
+              onError: (error) => toast.error(error),
+            })
+          }
           type="button"
         >
           {t.training.seedPlan}
@@ -89,9 +96,11 @@ function TrainingPage() {
                     { workoutPlanId: plan.id, status: "completed" },
                     {
                       onSuccess: (data) => {
+                        toast.success(t.toast.workoutCompleted);
                         const next = (data as { nextPlan?: { focus?: string } }).nextPlan;
                         setNextPlanNote(next?.focus ? `${t.training.nextPlanReady}: ${next.focus}` : t.training.nextPlanReady);
                       },
+                      onError: (error) => toast.error(error),
                     },
                   )
                 }
@@ -107,9 +116,11 @@ function TrainingPage() {
                     { workoutPlanId: plan.id, status: "skipped" },
                     {
                       onSuccess: (data) => {
+                        toast.success(t.toast.workoutSkipped);
                         const next = (data as { nextPlan?: { focus?: string } }).nextPlan;
                         setNextPlanNote(next?.focus ? `${t.training.nextPlanReady}: ${next.focus}` : t.training.nextPlanReady);
                       },
+                      onError: (error) => toast.error(error),
                     },
                   )
                 }

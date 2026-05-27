@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useMessages } from "@/features/i18n/use-messages";
+import { useAppToast } from "@/features/toast/use-app-toast";
 import { useNutritionActions, useNutritionToday } from "@/features/nutrition/use-nutrition";
 
 export const Route = createFileRoute("/dashboard/nutrition")({
@@ -9,6 +10,7 @@ export const Route = createFileRoute("/dashboard/nutrition")({
 
 function NutritionPage() {
   const t = useMessages();
+  const toast = useAppToast();
   const { data, isLoading } = useNutritionToday();
   const { estimateMutation, saveMutation, deleteMutation } = useNutritionActions();
   const [description, setDescription] = useState("");
@@ -40,6 +42,7 @@ function NutritionPage() {
             onClick={() =>
               estimateMutation.mutate(description, {
                 onSuccess: (res) => setDraft(res.estimate),
+                onError: (error) => toast.error(error),
               })
             }
             type="button"
@@ -60,7 +63,14 @@ function NutritionPage() {
                     fatsG: draft.fats_g,
                     source: "ai",
                   },
-                  { onSuccess: () => { setDraft(null); setDescription(""); } },
+                  {
+                    onSuccess: () => {
+                      setDraft(null);
+                      setDescription("");
+                      toast.success(t.toast.mealSaved);
+                    },
+                    onError: (error) => toast.error(error),
+                  },
                 )
               }
               type="button"
@@ -106,7 +116,12 @@ function NutritionPage() {
             </div>
             <button
               className="text-xs text-red-400"
-              onClick={() => deleteMutation.mutate(log.id)}
+              onClick={() =>
+                deleteMutation.mutate(log.id, {
+                  onSuccess: () => toast.success(t.toast.mealDeleted),
+                  onError: (error) => toast.error(error),
+                })
+              }
               type="button"
             >
               {t.nutrition.delete}

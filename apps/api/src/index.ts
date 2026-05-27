@@ -2,8 +2,8 @@ import "dotenv/config";
 import cors from "cors";
 import express from "express";
 import helmet from "helmet";
-import { ZodError } from "zod";
 import { corsOrigins, env, listenPort } from "./env.js";
+import { errorHandler } from "./lib/error-handler.js";
 import { healthRouter } from "./routes/health.js";
 import { aiRouter } from "./routes/ai.js";
 import { checkinsRouter } from "./routes/checkins.js";
@@ -45,20 +45,7 @@ app.use("/checkins", checkinsRouter);
 app.use("/ai", aiRouter);
 app.use("/dashboard", dashboardRouter);
 
-app.use((error: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
-  if (error instanceof ZodError) {
-    return res.status(400).json({
-      error: "VALIDATION_ERROR",
-      details: error.flatten(),
-    });
-  }
-
-  console.error(error);
-  return res.status(500).json({
-    error: "INTERNAL_ERROR",
-    message: "Something went wrong",
-  });
-});
+app.use(errorHandler);
 
 app.listen(listenPort, "0.0.0.0", () => {
   console.log(`Gymek API running on port ${listenPort}`);

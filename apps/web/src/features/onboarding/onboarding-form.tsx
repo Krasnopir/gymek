@@ -6,8 +6,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import type { Locale } from "@gymek/shared";
 import { localeLabels } from "@/i18n";
-import { clientEnv } from "@/lib/client-env";
 import { useLocale, useMessages } from "@/features/i18n/use-messages";
+import { useAppToast } from "@/features/toast/use-app-toast";
+import { apiFetch } from "@/lib/api";
 import { useAuth } from "../auth/auth-provider";
 import { useOnboardingStore } from "./onboarding-store";
 
@@ -21,6 +22,7 @@ type OnboardingFormValues = z.infer<typeof onboardingSchema>;
 
 export function OnboardingForm() {
   const t = useMessages();
+  const toast = useAppToast();
   const navigate = useNavigate();
   const { session } = useAuth();
   const { draft, setDraft } = useOnboardingStore();
@@ -45,27 +47,22 @@ export function OnboardingForm() {
         throw new Error("No active session");
       }
 
-      const response = await fetch(`${clientEnv.VITE_API_BASE_URL}/profile/upsert`, {
+      return apiFetch<{ profile: unknown }>("/profile/upsert", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({
           ...values,
           userId: session.user.id,
         }),
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to save profile");
-      }
-
-      return response.json();
     },
     onSuccess: (_, values) => {
       setDraft(values);
       setLocale(values.locale);
+      toast.success(t.toast.profileSaved);
       void navigate({ to: "/dashboard" });
+    },
+    onError: (error) => {
+      toast.error(error);
     },
   });
 
@@ -137,8 +134,6 @@ export function OnboardingForm() {
       >
         {saveMutation.isPending ? t.onboarding.saving : t.onboarding.save}
       </button>
-      {saveMutation.isError ? <p className="text-sm text-red-400">{t.onboarding.failed}</p> : null}
-      {saveMutation.isSuccess ? <p className="text-sm text-emerald-400">{t.onboarding.saved}</p> : null}
     </form>
   );
 }

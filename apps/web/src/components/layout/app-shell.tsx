@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import type { PropsWithChildren } from "react";
 import { useMessages } from "@/features/i18n/use-messages";
+import { useAppToast } from "@/features/toast/use-app-toast";
 import { signOut } from "@/features/auth/auth-actions";
 import { useAuth } from "@/features/auth/auth-provider";
 
@@ -13,7 +14,17 @@ const navItems = [
 
 export const AppShell = ({ children }: PropsWithChildren) => {
   const t = useMessages();
+  const toast = useAppToast();
   const { session } = useAuth();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      toast.success(t.toast.signedOut);
+    } catch (error) {
+      toast.error(error);
+    }
+  };
   const pathname = useRouterState({ select: (state) => state.location.pathname });
 
   return (
@@ -41,7 +52,7 @@ export const AppShell = ({ children }: PropsWithChildren) => {
         </nav>
         <button
           className="mt-auto rounded-lg border border-zinc-700 px-3 py-2 text-left text-sm"
-          onClick={() => void signOut()}
+          onClick={() => void handleSignOut()}
           type="button"
         >
           {t.auth.signOut}
