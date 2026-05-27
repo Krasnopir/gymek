@@ -25,11 +25,11 @@ body {
 }
 
 .gymek-card-violet {
-  @apply gymek-card bg-gradient-to-br from-violet-50 via-white to-zinc-50 dark:from-violet-950/30 dark:via-zinc-900/40 dark:to-zinc-900/40;
+  @apply rounded-xl border border-zinc-200 bg-gradient-to-br from-violet-50 via-white to-zinc-50 p-4 shadow-sm dark:border-zinc-800 dark:from-violet-950/30 dark:via-zinc-900/40 dark:to-zinc-900/40 dark:shadow-none;
 }
 
 .gymek-card-lime {
-  @apply gymek-card bg-gradient-to-br from-lime-50 via-white to-emerald-50/50 dark:from-lime-950/20 dark:via-zinc-900/40 dark:to-zinc-900/40;
+  @apply rounded-xl border border-zinc-200 bg-gradient-to-br from-lime-50 via-white to-emerald-50/50 p-4 shadow-sm dark:border-zinc-800 dark:from-lime-950/20 dark:via-zinc-900/40 dark:to-zinc-900/40 dark:shadow-none;
 }
 
 .gymek-subcard {
