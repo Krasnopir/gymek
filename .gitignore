@@ -1,0 +1,12 @@
+node_modules
+.DS_Store
+dist
+build
+.turbo
+.env
+.env.local
+.env.*.local
+apps/web/.tanstack
+apps/web/.output
+apps/web/.nitro
+apps/api/dist
