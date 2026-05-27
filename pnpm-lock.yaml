@@ -25,6 +25,9 @@ importers:
       helmet:
         specifier: ^8.1.0
         version: 8.2.0
+      ws:
+        specifier: ^8.18.3
+        version: 8.21.0
       zod:
         specifier: ^4.1.12
         version: 4.4.3
@@ -38,6 +41,9 @@ importers:
       '@types/node':
         specifier: ^24.10.0
         version: 24.12.4
+      '@types/ws':
+        specifier: ^8.18.1
+        version: 8.18.1
       tsx:
         specifier: ^4.20.6
         version: 4.22.3
@@ -98,6 +104,9 @@ importers:
       tailwindcss:
         specifier: ^4.1.18
         version: 4.3.0
+      ws:
+        specifier: ^8.18.3
+        version: 8.21.0
       zod:
         specifier: ^4.1.12
         version: 4.4.3
@@ -126,6 +135,9 @@ importers:
       '@types/react-dom':
         specifier: ^19.2.0
         version: 19.2.3(@types/react@19.2.15)
+      '@types/ws':
+        specifier: ^8.18.1
+        version: 8.18.1
       '@vitejs/plugin-react':
         specifier: ^6.0.1
         version: 6.0.2(vite@8.0.14(@types/node@22.19.19)(esbuild@0.28.0)(jiti@2.7.0)(tsx@4.22.3))
@@ -1360,6 +1372,9 @@ packages:
 
   '@types/serve-static@2.2.0':
     resolution: {integrity: sha512-8mam4H1NHLtu7nmtalF7eyBH14QyOASmcxHhSfEoRyr0nP/YdoesEtU+uSRvMe96TW/HPTtkoKqQLl53N7UXMQ==}
+
+  '@types/ws@8.18.1':
+    resolution: {integrity: sha512-ThVF6DCVhA8kUGy+aazFQ4kXQ7E1Ty7A3ypFOe0IcJV8O/M511G99AW24irKrW56Wt44yG9+ij8FaqoBGkuBXg==}
 
   '@vitejs/plugin-react@6.0.2':
     resolution: {integrity: sha512-DlSMqo4WhThw4vB8Mpn0Woe9J+Jfq1geJ61AKW0QEgLzGMNwtIMdxbDUzLxcun8W7NbJO0e2Jg/Nxm3cCSVzzg==}
@@ -3761,6 +3776,10 @@ snapshots:
   '@types/serve-static@2.2.0':
     dependencies:
       '@types/http-errors': 2.0.5
+      '@types/node': 24.12.4
+
+  '@types/ws@8.18.1':
+    dependencies:
       '@types/node': 24.12.4
 
   '@vitejs/plugin-react@6.0.2(vite@8.0.14(@types/node@22.19.19)(esbuild@0.28.0)(jiti@2.7.0)(tsx@4.22.3))':

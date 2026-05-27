@@ -11,6 +11,25 @@ Gymek is a private-first AI fitness companion with adaptive training, nutrition 
 
 ## Local start
 
+**Нужны 2 процесса:** web (`:3000`) + api (`:8787`).
+
+```bash
+cd gymek
+pnpm install
+pnpm dev
+```
+
+Или в двух терминалах:
+
+```bash
+pnpm dev:api   # http://localhost:8787/health
+pnpm dev:web   # http://localhost:3000
+```
+
+Если web пишет `Port 3000 is in use` — открой URL из консоли (например `:3002`) или освободи порт.
+
+Node **20+** (лучше **22** — см. `.nvmrc`).
+
 1. Copy envs:
    - `cp .env.example .env`
    - `cp .env.example apps/api/.env` (or set env in shell)
