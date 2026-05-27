@@ -91,4 +91,5 @@ PORT=3000 pnpm start:web
 | CORS error | `APP_BASE_URL` на API = точный URL web (без `/` в конце) |
 | Web build без API | Пересобери web после того как API задеплоился |
 | 502 на web | Проверь логи, `start` = `node .output/server/index.mjs` |
+| **500 на web** (`HTTPError`) | Не заданы `VITE_*` **до сборки**. Environment → добавь ключи → **Clear build cache & deploy** |
 | OAuth redirect | Site URL в Supabase = web Render URL |
