@@ -92,6 +92,7 @@
   "errors": {
     "unknown": "Something went wrong. Try again.",
     "network": "API is not responding ({{api}}). Run: pnpm dev:api",
+    "networkHint": "Browser could not reach API ({{api}}). Web: {{web}}. Usually CORS or API down — restart pnpm dev.",
     "cors": "CORS blocked. Set APP_BASE_URL in apps/api/.env to your frontend URL.",
     "validation": "Check the form — invalid input.",
     "profileNotFound": "Profile not found. Complete onboarding again.",

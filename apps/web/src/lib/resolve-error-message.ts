@@ -29,7 +29,7 @@ export function resolveErrorMessage(error: unknown, t: Messages): string {
   }
 
   if (error instanceof TypeError && /fetch|network/i.test(error.message)) {
-    return t.errors.network.replace("{{api}}", clientEnv.VITE_API_BASE_URL);
+    return formatNetworkError(t);
   }
 
   if (error instanceof Error) {
@@ -38,11 +38,21 @@ export function resolveErrorMessage(error: unknown, t: Messages): string {
     }
 
     if (error.message.includes("Failed to fetch")) {
-      return t.errors.network.replace("{{api}}", clientEnv.VITE_API_BASE_URL);
+      return formatNetworkError(t);
     }
 
     return error.message;
   }
 
   return t.errors.unknown;
+}
+
+function formatNetworkError(t: Messages): string {
+  const api = clientEnv.VITE_API_BASE_URL;
+  if (typeof window !== "undefined") {
+    return t.errors.networkHint
+      .replace("{{api}}", api)
+      .replace("{{web}}", window.location.origin);
+  }
+  return t.errors.network.replace("{{api}}", api);
 }

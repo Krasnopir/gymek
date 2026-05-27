@@ -2,7 +2,7 @@ import "dotenv/config";
 import cors from "cors";
 import express from "express";
 import helmet from "helmet";
-import { corsOrigins, env, listenPort } from "./env.js";
+import { env, isAllowedCorsOrigin, listenPort } from "./env.js";
 import { errorHandler } from "./lib/error-handler.js";
 import { healthRouter } from "./routes/health.js";
 import { aiRouter } from "./routes/ai.js";
@@ -20,7 +20,7 @@ app.use(
   cors({
     credentials: true,
     origin(origin, callback) {
-      if (!origin || corsOrigins.includes(origin)) {
+      if (isAllowedCorsOrigin(origin)) {
         callback(null, true);
         return;
       }

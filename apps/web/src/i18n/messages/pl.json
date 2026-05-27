@@ -92,6 +92,7 @@
   "errors": {
     "unknown": "Coś poszło nie tak. Spróbuj ponownie.",
     "network": "API nie odpowiada ({{api}}). Uruchom: pnpm dev:api",
+    "networkHint": "Przeglądarka nie połączyła się z API ({{api}}). Web: {{web}}. Zwykle CORS — uruchom ponownie pnpm dev.",
     "cors": "CORS: ustaw APP_BASE_URL w apps/api/.env na URL frontendu.",
     "validation": "Sprawdź formularz — nieprawidłowe dane.",
     "profileNotFound": "Nie znaleziono profilu. Ukończ onboarding ponownie.",

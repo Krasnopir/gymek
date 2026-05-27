@@ -92,6 +92,7 @@
   "errors": {
     "unknown": "Что-то пошло не так. Попробуй ещё раз.",
     "network": "API не отвечает ({{api}}). Запусти: pnpm dev:api",
+    "networkHint": "Браузер не достучался до API ({{api}}). Web сейчас: {{web}}. Обычно CORS или API не запущен — перезапусти pnpm dev.",
     "cors": "CORS: в apps/api/.env укажи APP_BASE_URL как URL фронта (порт из консоли Vite).",
     "validation": "Проверь поля формы — что-то заполнено криво.",
     "profileNotFound": "Профиль не найден. Сохрани onboarding ещё раз.",

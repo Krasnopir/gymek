@@ -92,6 +92,7 @@
   "errors": {
     "unknown": "Щось пішло не так. Спробуй ще раз.",
     "network": "API не відповідає ({{api}}). Запусти: pnpm dev:api",
+    "networkHint": "Браузер не дістався до API ({{api}}). Web: {{web}}. Зазвичай CORS — перезапусти pnpm dev.",
     "cors": "CORS: у apps/api/.env вкажи APP_BASE_URL як URL фронта.",
     "validation": "Перевір поля форми.",
     "profileNotFound": "Профіль не знайдено. Пройди onboarding знову.",
