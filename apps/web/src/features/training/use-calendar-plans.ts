@@ -15,11 +15,15 @@ function addDays(days: number) {
   return d.toISOString().slice(0, 10);
 }
 
+function todayDateString() {
+  return new Date().toISOString().slice(0, 10);
+}
+
 export const useCalendarPlans = () => {
   const { session } = useAuth();
   const userId = session?.user.id;
-  const from = addDays(-7);
-  const to = addDays(7);
+  const from = addDays(-28);
+  const to = todayDateString();
 
   return useQuery({
     queryKey: ["calendar-plans", userId, from, to],

@@ -34,6 +34,9 @@ export type PlannedExercise = {
   muscle: string;
   sets: number;
   reps: string;
+  weight_kg?: number | null;
+  description?: string;
+  coaching_tip?: string;
 };
 
 export type WorkoutPlanDraft = {
@@ -43,45 +46,69 @@ export type WorkoutPlanDraft = {
 };
 
 export async function buildUserContext(userId: string) {
-  const [profileRes, plansRes, sessionsRes, metricsRes, nutritionRes, checkinRes] =
-    await Promise.all([
-      supabaseAdmin.from("profiles").select("*").eq("id", userId).single(),
-      supabaseAdmin
-        .from("workout_plans")
-        .select("plan_date, focus, status")
-        .eq("user_id", userId)
-        .order("plan_date", { ascending: false })
-        .limit(14),
-      supabaseAdmin
-        .from("workout_sessions")
-        .select("session_date, status, note")
-        .eq("user_id", userId)
-        .order("session_date", { ascending: false })
-        .limit(10),
-      supabaseAdmin
-        .from("body_metrics")
-        .select("metric_date, weight_kg")
-        .eq("user_id", userId)
-        .order("metric_date", { ascending: false })
-        .limit(7),
-      supabaseAdmin
-        .from("nutrition_logs")
-        .select("log_date, meal_label, calories_kcal, protein_g")
-        .eq("user_id", userId)
-        .order("log_date", { ascending: false })
-        .limit(10),
-      supabaseAdmin
-        .from("daily_checkins")
-        .select("checkin_date, sleep_hours, stress_score, soreness")
-        .eq("user_id", userId)
-        .order("checkin_date", { ascending: false })
-        .limit(5),
-    ]);
+  const [
+    profileRes,
+    plansRes,
+    sessionsRes,
+    exerciseLogsRes,
+    memoryRes,
+    metricsRes,
+    nutritionRes,
+    checkinRes,
+  ] = await Promise.all([
+    supabaseAdmin.from("profiles").select("*").eq("id", userId).single(),
+    supabaseAdmin
+      .from("workout_plans")
+      .select("plan_date, focus, status")
+      .eq("user_id", userId)
+      .order("plan_date", { ascending: false })
+      .limit(14),
+    supabaseAdmin
+      .from("workout_sessions")
+      .select("session_date, status, note, skip_reason_code")
+      .eq("user_id", userId)
+      .order("session_date", { ascending: false })
+      .limit(10),
+    supabaseAdmin
+      .from("workout_exercise_logs")
+      .select(
+        "completed, planned_weight_kg, actual_weight_kg, planned_reps, actual_reps, note, workout_exercises(exercise_name), workout_sessions!inner(session_date)",
+      )
+      .eq("workout_sessions.user_id", userId)
+      .order("created_at", { ascending: false })
+      .limit(24),
+    supabaseAdmin
+      .from("ai_memory_facts")
+      .select("fact_type, fact_text, source_date")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false })
+      .limit(12),
+    supabaseAdmin
+      .from("body_metrics")
+      .select("metric_date, weight_kg")
+      .eq("user_id", userId)
+      .order("metric_date", { ascending: false })
+      .limit(7),
+    supabaseAdmin
+      .from("nutrition_logs")
+      .select("log_date, meal_label, calories_kcal, protein_g")
+      .eq("user_id", userId)
+      .order("log_date", { ascending: false })
+      .limit(10),
+    supabaseAdmin
+      .from("daily_checkins")
+      .select("checkin_date, sleep_hours, stress_score, soreness")
+      .eq("user_id", userId)
+      .order("checkin_date", { ascending: false })
+      .limit(5),
+  ]);
 
   return {
     profile: profileRes.data,
     recentPlans: plansRes.data ?? [],
     recentSessions: sessionsRes.data ?? [],
+    recentExerciseLogs: exerciseLogsRes.data ?? [],
+    recentMemoryFacts: memoryRes.data ?? [],
     recentMetrics: metricsRes.data ?? [],
     recentNutrition: nutritionRes.data ?? [],
     recentCheckins: checkinRes.data ?? [],
@@ -110,7 +137,7 @@ export async function generateWorkoutPlan(params: {
   const result = await openaiJsonCompletion<WorkoutPlanDraft>([
     {
       role: "system",
-      content: `${toneSystem} Отвечай JSON: {"focus":"","ai_note":"","exercises":[{"name":"","muscle":"","sets":3,"reps":"8-12"}]}. Учитывай травмы и recovery. ${minutes} минут max.`,
+      content: `${toneSystem} Отвечай JSON: {"focus":"","ai_note":"","exercises":[{"name":"","muscle":"","sets":3,"reps":"8-12","weight_kg":40,"description":"что за упражнение и техника","coaching_tip":"короткий совет"}]}. Подбирай реалистичные веса под уровень. Если в history видно, что атлет не потянул плановый вес — снижай нагрузку, не форсируй. Учитывай травмы и recovery. ${minutes} минут max.`,
     },
     {
       role: "user",
@@ -129,6 +156,8 @@ export async function generateWorkoutPlan(params: {
         history: {
           plans: ctx.recentPlans,
           sessions: ctx.recentSessions,
+          exerciseLogs: ctx.recentExerciseLogs,
+          memoryFacts: ctx.recentMemoryFacts,
           checkins: ctx.recentCheckins,
         },
       }),

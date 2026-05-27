@@ -13,6 +13,7 @@ import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardTrainingRouteImport } from './routes/dashboard/training'
+import { Route as DashboardSettingsRouteImport } from './routes/dashboard/settings'
 import { Route as DashboardProgressRouteImport } from './routes/dashboard/progress'
 import { Route as DashboardNutritionRouteImport } from './routes/dashboard/nutrition'
 
@@ -36,6 +37,11 @@ const DashboardTrainingRoute = DashboardTrainingRouteImport.update({
   path: '/training',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
+const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
 const DashboardProgressRoute = DashboardProgressRouteImport.update({
   id: '/progress',
   path: '/progress',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/dashboard/nutrition': typeof DashboardNutritionRoute
   '/dashboard/progress': typeof DashboardProgressRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/training': typeof DashboardTrainingRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard/nutrition': typeof DashboardNutritionRoute
   '/dashboard/progress': typeof DashboardProgressRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/training': typeof DashboardTrainingRoute
   '/dashboard': typeof DashboardIndexRoute
 }
@@ -68,6 +76,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/dashboard/nutrition': typeof DashboardNutritionRoute
   '/dashboard/progress': typeof DashboardProgressRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/training': typeof DashboardTrainingRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
@@ -78,6 +87,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/dashboard/nutrition'
     | '/dashboard/progress'
+    | '/dashboard/settings'
     | '/dashboard/training'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
@@ -85,6 +95,7 @@ export interface FileRouteTypes {
     | '/'
     | '/dashboard/nutrition'
     | '/dashboard/progress'
+    | '/dashboard/settings'
     | '/dashboard/training'
     | '/dashboard'
   id:
@@ -93,6 +104,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/dashboard/nutrition'
     | '/dashboard/progress'
+    | '/dashboard/settings'
     | '/dashboard/training'
     | '/dashboard/'
   fileRoutesById: FileRoutesById
@@ -132,6 +144,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardTrainingRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
+    '/dashboard/settings': {
+      id: '/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardSettingsRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
     '/dashboard/progress': {
       id: '/dashboard/progress'
       path: '/progress'
@@ -152,6 +171,7 @@ declare module '@tanstack/react-router' {
 interface DashboardRouteRouteChildren {
   DashboardNutritionRoute: typeof DashboardNutritionRoute
   DashboardProgressRoute: typeof DashboardProgressRoute
+  DashboardSettingsRoute: typeof DashboardSettingsRoute
   DashboardTrainingRoute: typeof DashboardTrainingRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
@@ -159,6 +179,7 @@ interface DashboardRouteRouteChildren {
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardNutritionRoute: DashboardNutritionRoute,
   DashboardProgressRoute: DashboardProgressRoute,
+  DashboardSettingsRoute: DashboardSettingsRoute,
   DashboardTrainingRoute: DashboardTrainingRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }

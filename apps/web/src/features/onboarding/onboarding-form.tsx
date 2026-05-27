@@ -8,6 +8,8 @@ import type { Locale } from "@gymek/shared";
 import { localeLabels } from "@/i18n";
 import { useLocale, useMessages } from "@/features/i18n/use-messages";
 import { useAppToast } from "@/features/toast/use-app-toast";
+import { Button } from "@/components/ui/button";
+import { inputClassName, selectClassName } from "@/components/ui/field";
 import { apiFetch } from "@/lib/api";
 import { useAuth } from "../auth/auth-provider";
 import { useOnboardingStore } from "./onboarding-store";
@@ -86,7 +88,8 @@ export function OnboardingForm() {
           {t.onboarding.goal}
         </label>
         <input
-          className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm outline-none focus:border-zinc-500"
+          className={inputClassName}
+          disabled={saveMutation.isPending}
           id="trainingGoal"
           placeholder={t.onboarding.goalPlaceholder}
           {...form.register("trainingGoal")}
@@ -98,7 +101,8 @@ export function OnboardingForm() {
           {t.onboarding.aiTone}
         </label>
         <select
-          className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm outline-none focus:border-zinc-500"
+          className={selectClassName}
+          disabled={saveMutation.isPending}
           id="aiTone"
           {...form.register("aiTone")}
         >
@@ -115,7 +119,8 @@ export function OnboardingForm() {
           {t.onboarding.locale}
         </label>
         <select
-          className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm outline-none focus:border-zinc-500"
+          className={selectClassName}
+          disabled={saveMutation.isPending}
           id="locale"
           {...form.register("locale")}
         >
@@ -127,13 +132,14 @@ export function OnboardingForm() {
         </select>
       </div>
 
-      <button
-        className="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-black disabled:cursor-not-allowed disabled:opacity-60"
-        disabled={saveMutation.isPending}
+      <Button
+        loading={saveMutation.isPending}
+        loadingLabel={t.onboarding.saving}
         type="submit"
+        variant="primary"
       >
-        {saveMutation.isPending ? t.onboarding.saving : t.onboarding.save}
-      </button>
+        {t.onboarding.save}
+      </Button>
     </form>
   );
 }

@@ -28,7 +28,27 @@
     "dashboard": "Главная",
     "training": "Тренировки",
     "nutrition": "Питание",
-    "progress": "Прогресс"
+    "progress": "Прогресс",
+    "settings": "Настройки"
+  },
+  "settings": {
+    "appearance": "Внешний вид",
+    "themeHint": "Тема сохраняется на этом устройстве.",
+    "themeLight": "Светлая",
+    "themeDark": "Тёмная",
+    "themeSystem": "Система",
+    "language": "Язык интерфейса",
+    "aiTone": "Жаргон Gymek",
+    "aiToneHint": "Как AI общается в планах, питании и разборах.",
+    "toneHints": {
+      "goblin": "Сарказм, мат умеренно, gym goblin.",
+      "bro": "Бро-коуч, дружелюбно и по делу.",
+      "chill": "Спокойно, без мата.",
+      "science": "Факты, прогрессия, без цирка."
+    },
+    "currentGoal": "Текущая цель",
+    "save": "Сохранить настройки",
+    "saved": "Настройки сохранены."
   },
   "dashboard": {
     "today": "Сегодня",
@@ -55,16 +75,48 @@
     "statusCompleted": "Сделано",
     "statusSkipped": "Скип",
     "statusPlanned": "Запланировано",
+    "statusPartial": "Частично",
+    "planOnDate": "План на {{date}}",
+    "historyOnDate": "История · {{date}}",
+    "noPlanOnDay": "На этот день плана не было. Выбери другой день в календаре.",
+    "skippedNoDetails": "Скип без деталей.",
+    "actual": "Факт",
+    "legendCompleted": "сделано",
+    "legendSkipped": "скип",
+    "legendPlanned": "запланировано",
+    "legendEmpty": "пусто",
     "goblinHint": "Слово от Gymek",
     "seedPlan": "AI: план на сегодня",
     "loading": "Гружу…",
-    "nextPlanReady": "План на завтра готов"
+    "nextPlanReady": "План на завтра готов",
+    "plan": "План",
+    "markDone": "Отметить выполненным",
+    "exerciseInfo": "Описание упражнения",
+    "noDescription": "Описание пока пустое — сгенерируй новый план, Gymek допишет.",
+    "actualWeight": "Вес (факт)",
+    "actualReps": "Повторы",
+    "actualSets": "Подходы",
+    "exerciseNotePlaceholder": "Коммент: не потянул, больит плечо…",
+    "skipDialogTitle": "Почему скип?",
+    "skipDialogHint": "Gymek учтёт это в завтрашнем плане — без морали, по фактам.",
+    "skipNotePlaceholder": "Подробнее своими словами…",
+    "confirmSkip": "Зафиксировать скип",
+    "cancelSkip": "Отмена",
+    "skipReasons": {
+      "tired": "Устал",
+      "injury": "Травма / боль",
+      "time": "Нет времени",
+      "noMotivation": "Нет мотивации",
+      "soreness": "Жёсткий DOMS",
+      "other": "Другое"
+    }
   },
   "nutrition": {
     "title": "Питание",
     "addMeal": "Добавить",
     "describeMeal": "Что съел? (AI посчитает)",
     "estimate": "Оценить AI",
+    "estimating": "Думаю…",
     "saveMeal": "Сохранить",
     "totals": "Итого за день",
     "calories": "ккал",
@@ -86,6 +138,7 @@
   "common": {
     "kg": "кг",
     "save": "Сохранить",
+    "saving": "Сохраняю…",
     "loading": "Гружу…",
     "error": "Что-то пошло не так"
   },
@@ -117,6 +170,7 @@
     "planGenerated": "План готов.",
     "summaryGenerated": "Вечерний разбор готов.",
     "photoUploaded": "Фото залито.",
-    "signedOut": "Вышел. До связи."
+    "signedOut": "Вышел. До связи.",
+    "settingsSaved": "Настройки сохранены."
   }
 }

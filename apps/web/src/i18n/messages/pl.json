@@ -28,7 +28,27 @@
     "dashboard": "Panel",
     "training": "Trening",
     "nutrition": "Dieta",
-    "progress": "Postęp"
+    "progress": "Postęp",
+    "settings": "Ustawienia"
+  },
+  "settings": {
+    "appearance": "Wygląd",
+    "themeHint": "Motyw zapisuje się na tym urządzeniu.",
+    "themeLight": "Jasny",
+    "themeDark": "Ciemny",
+    "themeSystem": "System",
+    "language": "Język interfejsu",
+    "aiTone": "Ton Gymek",
+    "aiToneHint": "Jak AI mówi w planach i podsumowaniach.",
+    "toneHints": {
+      "goblin": "Sarkastyczny gym goblin.",
+      "bro": "Przyjazny gym bro.",
+      "chill": "Spokojnie, bez wulgaryzmów.",
+      "science": "Fakty i progresja."
+    },
+    "currentGoal": "Aktualny cel",
+    "save": "Zapisz ustawienia",
+    "saved": "Zapisano."
   },
   "dashboard": {
     "today": "Dziś",
@@ -55,16 +75,48 @@
     "statusCompleted": "Zrobione",
     "statusSkipped": "Pominięte",
     "statusPlanned": "Zaplanowane",
+    "statusPartial": "Częściowo",
+    "planOnDate": "Plan na {{date}}",
+    "historyOnDate": "Historia · {{date}}",
+    "noPlanOnDay": "Brak planu na ten dzień. Wybierz inną datę w kalendarzu.",
+    "skippedNoDetails": "Skip bez szczegółów.",
+    "actual": "Fakt",
+    "legendCompleted": "zrobione",
+    "legendSkipped": "skip",
+    "legendPlanned": "zaplanowane",
+    "legendEmpty": "pusto",
     "goblinHint": "Słowo od Gymek",
     "seedPlan": "AI: plan na dziś",
     "loading": "Ładuję…",
-    "nextPlanReady": "Plan na jutro gotowy"
+    "nextPlanReady": "Plan na jutro gotowy",
+    "plan": "Plan",
+    "markDone": "Oznacz jako zrobione",
+    "exerciseInfo": "Opis ćwiczenia",
+    "noDescription": "Brak opisu — wygeneruj nowy plan.",
+    "actualWeight": "Ciężar (fakt)",
+    "actualReps": "Powtórzenia",
+    "actualSets": "Serie",
+    "exerciseNotePlaceholder": "Notatka: za ciężko, boli bark…",
+    "skipDialogTitle": "Czemu skip?",
+    "skipDialogHint": "Gymek dostosuje jutrzejszy plan.",
+    "skipNotePlaceholder": "Więcej słowami…",
+    "confirmSkip": "Potwierdź skip",
+    "cancelSkip": "Anuluj",
+    "skipReasons": {
+      "tired": "Zmęczenie",
+      "injury": "Kontuzja / ból",
+      "time": "Brak czasu",
+      "noMotivation": "Brak motywacji",
+      "soreness": "DOMS",
+      "other": "Inne"
+    }
   },
   "nutrition": {
     "title": "Dieta",
     "addMeal": "Dodaj",
     "describeMeal": "Co zjadłeś? (AI policzy)",
     "estimate": "Oceń AI",
+    "estimating": "Myślę…",
     "saveMeal": "Zapisz posiłek",
     "totals": "Suma dnia",
     "calories": "kcal",
@@ -86,6 +138,7 @@
   "common": {
     "kg": "kg",
     "save": "Zapisz",
+    "saving": "Zapisuję…",
     "loading": "Ładuję…",
     "error": "Coś poszło nie tak"
   },
@@ -117,6 +170,7 @@
     "planGenerated": "Plan gotowy.",
     "summaryGenerated": "Podsumowanie gotowe.",
     "photoUploaded": "Zdjęcie wgrane.",
-    "signedOut": "Wylogowano."
+    "signedOut": "Wylogowano.",
+    "settingsSaved": "Zapisano ustawienia."
   }
 }

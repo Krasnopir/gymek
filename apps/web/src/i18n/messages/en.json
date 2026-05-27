@@ -28,7 +28,27 @@
     "dashboard": "Dashboard",
     "training": "Training",
     "nutrition": "Nutrition",
-    "progress": "Progress"
+    "progress": "Progress",
+    "settings": "Settings"
+  },
+  "settings": {
+    "appearance": "Appearance",
+    "themeHint": "Theme is saved on this device.",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeSystem": "System",
+    "language": "Interface language",
+    "aiTone": "Gymek tone",
+    "aiToneHint": "How AI talks in plans, nutrition, and summaries.",
+    "toneHints": {
+      "goblin": "Sarcastic gym goblin, mild profanity.",
+      "bro": "Friendly gym bro.",
+      "chill": "Calm, no swearing.",
+      "science": "Evidence-based, load progression."
+    },
+    "currentGoal": "Current goal",
+    "save": "Save settings",
+    "saved": "Settings saved."
   },
   "dashboard": {
     "today": "Today",
@@ -55,16 +75,48 @@
     "statusCompleted": "Done",
     "statusSkipped": "Skipped",
     "statusPlanned": "Planned",
+    "statusPartial": "Partial",
+    "planOnDate": "Plan for {{date}}",
+    "historyOnDate": "History · {{date}}",
+    "noPlanOnDay": "No plan on this day. Pick another date on the calendar.",
+    "skippedNoDetails": "Skipped with no details.",
+    "actual": "Actual",
+    "legendCompleted": "done",
+    "legendSkipped": "skipped",
+    "legendPlanned": "planned",
+    "legendEmpty": "empty",
     "goblinHint": "Word from Gymek",
     "seedPlan": "AI: today's plan",
     "loading": "Loading…",
-    "nextPlanReady": "Tomorrow's plan is ready"
+    "nextPlanReady": "Tomorrow's plan is ready",
+    "plan": "Plan",
+    "markDone": "Mark done",
+    "exerciseInfo": "Exercise info",
+    "noDescription": "No description yet — generate a fresh plan.",
+    "actualWeight": "Weight (actual)",
+    "actualReps": "Reps",
+    "actualSets": "Sets",
+    "exerciseNotePlaceholder": "Note: failed rep, shoulder pain…",
+    "skipDialogTitle": "Why skip?",
+    "skipDialogHint": "Gymek will adapt tomorrow's plan based on this.",
+    "skipNotePlaceholder": "More detail in your words…",
+    "confirmSkip": "Confirm skip",
+    "cancelSkip": "Cancel",
+    "skipReasons": {
+      "tired": "Tired",
+      "injury": "Injury / pain",
+      "time": "No time",
+      "noMotivation": "No motivation",
+      "soreness": "Sore DOMS",
+      "other": "Other"
+    }
   },
   "nutrition": {
     "title": "Nutrition",
     "addMeal": "Add",
     "describeMeal": "What did you eat? (AI estimates)",
     "estimate": "AI estimate",
+    "estimating": "Thinking…",
     "saveMeal": "Save meal",
     "totals": "Daily totals",
     "calories": "kcal",
@@ -86,6 +138,7 @@
   "common": {
     "kg": "kg",
     "save": "Save",
+    "saving": "Saving…",
     "loading": "Loading…",
     "error": "Something went wrong"
   },
@@ -117,6 +170,7 @@
     "planGenerated": "Plan ready.",
     "summaryGenerated": "Evening summary ready.",
     "photoUploaded": "Photo uploaded.",
-    "signedOut": "Signed out."
+    "signedOut": "Signed out.",
+    "settingsSaved": "Settings saved."
   }
 }

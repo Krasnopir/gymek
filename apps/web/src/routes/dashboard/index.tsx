@@ -1,5 +1,18 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { Activity, Flame, Moon, Scale, Sparkles } from "lucide-react";
 import { useState } from "react";
+import { Button, linkButtonClass } from "@/components/ui/button";
+import { inputClassName } from "@/components/ui/field";
+import {
+  EmojiRange,
+  moodEmoji,
+  moodGradient,
+  moodHint,
+  stressEmoji,
+  stressGradient,
+  stressHint,
+} from "@/components/ui/emoji-range";
+import { StatCard } from "@/components/ui/stat-card";
 import { useGenerateSummary, useDailySummary } from "@/features/ai/use-daily-summary";
 import { useCheckinActions, useCheckinToday } from "@/features/checkins/use-checkin";
 import { useDashboardSummary } from "@/features/dashboard/use-dashboard-summary";
@@ -32,26 +45,32 @@ function DashboardHome() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">{t.nav.dashboard}</h1>
+      <h1 className="gymek-page-title">
+        <Activity className="h-6 w-6 text-violet-500 dark:text-violet-400" />
+        {t.nav.dashboard}
+      </h1>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard
-          label={t.dashboard.weight}
-          value={
+        <StatCard accent="blue" icon={Scale} label={t.dashboard.weight} value={
             data?.todayMetric?.weight_kg
               ? `${data.todayMetric.weight_kg} ${t.common.kg}`
               : "—"
-          }
-        />
+          } />
         <StatCard
+          accent="orange"
+          icon={Flame}
           label={t.dashboard.calories}
           value={`${Math.round(data?.nutritionTotals.calories ?? 0)} ${t.nutrition.calories}`}
         />
         <StatCard
+          accent="emerald"
+          icon={Activity}
           label={t.dashboard.protein}
           value={`${Math.round(data?.nutritionTotals.protein ?? 0)} g`}
         />
         <StatCard
+          accent="indigo"
+          icon={Moon}
           label={t.dashboard.sleep}
           value={
             data?.todayCheckin?.sleep_hours
@@ -61,63 +80,55 @@ function DashboardHome() {
         />
       </div>
 
-      <section className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4">
-        <h2 className="text-sm font-medium text-zinc-400">{t.dashboard.today}</h2>
+      <section className="gymek-card">
+        <h2 className="gymek-section-title">{t.dashboard.today}</h2>
         {isLoading ? (
-          <p className="mt-2 text-sm text-zinc-500">{t.common.loading}</p>
+          <p className="mt-2 gymek-muted">{t.common.loading}</p>
         ) : plan ? (
           <div className="mt-2 space-y-2">
-            <p className="text-lg font-semibold">{plan.focus}</p>
-            {plan.ai_note ? <p className="text-sm text-zinc-400">{plan.ai_note}</p> : null}
-            <Link
-              className="inline-block rounded-lg bg-white px-4 py-2 text-sm font-semibold text-black"
-              to="/dashboard/training"
-            >
+            <p className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">{plan.focus}</p>
+            {plan.ai_note ? <p className="gymek-muted">{plan.ai_note}</p> : null}
+            <Link className={linkButtonClass("primary")} to="/dashboard/training">
               {t.dashboard.openTraining}
             </Link>
           </div>
         ) : (
           <div className="mt-2">
-            <p className="text-sm text-zinc-400">{t.dashboard.noWorkout}</p>
-            <Link
-              className="mt-2 inline-block rounded-lg bg-white px-4 py-2 text-sm font-semibold text-black"
-              to="/dashboard/training"
-            >
+            <p className="gymek-muted">{t.dashboard.noWorkout}</p>
+            <Link className={`${linkButtonClass("primary")} mt-2`} to="/dashboard/training">
               {t.dashboard.openTraining}
             </Link>
           </div>
         )}
       </section>
 
-      <section className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4">
-        <h2 className="text-sm font-medium text-zinc-400">{t.dashboard.checkinTitle}</h2>
-        <div className="mt-3 grid gap-3 sm:grid-cols-3">
-          <label className="text-xs text-zinc-400">
-            {t.dashboard.mood}
+      <section className="gymek-card-violet">
+        <h2 className="gymek-section-title">{t.dashboard.checkinTitle}</h2>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <EmojiRange
+            emojiForValue={moodEmoji}
+            gradientForValue={moodGradient}
+            hintForValue={moodHint}
+            label={t.dashboard.mood}
+            onChange={setMood}
+            value={mood}
+          />
+          <EmojiRange
+            emojiForValue={stressEmoji}
+            gradientForValue={stressGradient}
+            hintForValue={stressHint}
+            label={t.dashboard.stress}
+            onChange={setStress}
+            value={stress}
+          />
+          <label className="gymek-subcard flex flex-col justify-center text-xs text-zinc-600 dark:text-zinc-400">
+            <span className="mb-2 flex items-center gap-1 font-medium">
+              <Moon className="h-3.5 w-3.5" />
+              {t.dashboard.sleepHours}
+            </span>
             <input
-              className="mt-1 w-full"
-              max={10}
-              min={1}
-              onChange={(e) => setMood(Number(e.target.value))}
-              type="range"
-              value={mood}
-            />
-          </label>
-          <label className="text-xs text-zinc-400">
-            {t.dashboard.stress}
-            <input
-              className="mt-1 w-full"
-              max={10}
-              min={1}
-              onChange={(e) => setStress(Number(e.target.value))}
-              type="range"
-              value={stress}
-            />
-          </label>
-          <label className="text-xs text-zinc-400">
-            {t.dashboard.sleepHours}
-            <input
-              className="mt-1 w-full rounded-lg border border-zinc-700 bg-zinc-900 px-2 py-1"
+              className={`${inputClassName} text-center`}
+              disabled={checkinMutation.isPending}
               onChange={(e) => setSleepHours(Number(e.target.value))}
               step={0.5}
               type="number"
@@ -125,9 +136,10 @@ function DashboardHome() {
             />
           </label>
         </div>
-        <button
-          className="mt-3 rounded-lg border border-zinc-700 px-4 py-2 text-sm"
-          disabled={checkinMutation.isPending}
+        <Button
+          className="mt-3"
+          loading={checkinMutation.isPending}
+          loadingLabel={t.common.saving}
           onClick={() =>
             checkinMutation.mutate(
               { moodScore: mood, stressScore: stress, sleepHours },
@@ -137,42 +149,37 @@ function DashboardHome() {
               },
             )
           }
-          type="button"
+          variant="outline"
         >
           {t.dashboard.saveCheckin}
-        </button>
+        </Button>
       </section>
 
-      <section className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-4">
+      <section className="gymek-card">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h2 className="text-sm font-medium text-zinc-400">{t.dashboard.gymekWord}</h2>
-          <button
-            className="rounded-lg border border-zinc-700 px-3 py-1 text-xs"
-            disabled={generateSummary.isPending}
+          <h2 className="flex items-center gap-1.5 gymek-section-title">
+            <Sparkles className="h-3.5 w-3.5 text-amber-500" />
+            {t.dashboard.gymekWord}
+          </h2>
+          <Button
+            loading={generateSummary.isPending}
+            loadingLabel={t.common.loading}
             onClick={() =>
               generateSummary.mutate(undefined, {
                 onSuccess: () => toast.success(t.toast.summaryGenerated),
                 onError: (error) => toast.error(error),
               })
             }
-            type="button"
+            size="sm"
+            variant="softViolet"
           >
             {t.dashboard.generateSummary}
-          </button>
+          </Button>
         </div>
-        <p className="mt-2 text-sm text-zinc-300">
+        <p className="mt-2 gymek-body">
           {summaryText ?? "Пока тишина. Поживи день — вечером Gymek выдаст разбор."}
         </p>
       </section>
-    </div>
-  );
-}
-
-function StatCard({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-3">
-      <p className="text-xs text-zinc-500">{label}</p>
-      <p className="mt-1 text-lg font-semibold">{value}</p>
     </div>
   );
 }

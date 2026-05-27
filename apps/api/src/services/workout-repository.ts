@@ -43,6 +43,9 @@ export async function persistWorkoutPlan(params: {
       target_muscle: exercise.muscle,
       target_sets: exercise.sets,
       target_reps: exercise.reps,
+      target_weight_kg: exercise.weight_kg ?? null,
+      exercise_description: exercise.description ?? null,
+      coaching_tip: exercise.coaching_tip ?? null,
     })),
   );
 

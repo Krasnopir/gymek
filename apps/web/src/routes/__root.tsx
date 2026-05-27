@@ -35,7 +35,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="bg-zinc-950">
+      <body>
         <AppProviders>{children}</AppProviders>
         <TanStackDevtools
           config={{

@@ -29,7 +29,7 @@ export const Toaster = () => {
             <p className="leading-snug">{toast.message}</p>
             <button
               aria-label="Close"
-              className="shrink-0 text-xs opacity-70 hover:opacity-100"
+              className="shrink-0 cursor-pointer rounded px-1 text-xs opacity-70 transition hover:bg-white/10 hover:opacity-100"
               onClick={() => dismiss(toast.id)}
               type="button"
             >

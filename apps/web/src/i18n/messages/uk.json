@@ -28,7 +28,27 @@
     "dashboard": "Головна",
     "training": "Тренування",
     "nutrition": "Харчування",
-    "progress": "Прогрес"
+    "progress": "Прогрес",
+    "settings": "Налаштування"
+  },
+  "settings": {
+    "appearance": "Зовнішній вигляд",
+    "themeHint": "Тема зберігається на цьому пристрої.",
+    "themeLight": "Світла",
+    "themeDark": "Темна",
+    "themeSystem": "Система",
+    "language": "Мова інтерфейсу",
+    "aiTone": "Жаргон Gymek",
+    "aiToneHint": "Як AI спілкується в планах і розборах.",
+    "toneHints": {
+      "goblin": "Сарказм, мат помірно, gym goblin.",
+      "bro": "Бро-коуч, дружелюбно.",
+      "chill": "Спокійно, без мата.",
+      "science": "Факти, прогресія."
+    },
+    "currentGoal": "Поточна ціль",
+    "save": "Зберегти",
+    "saved": "Налаштування збережено."
   },
   "dashboard": {
     "today": "Сьогодні",
@@ -55,16 +75,48 @@
     "statusCompleted": "Зроблено",
     "statusSkipped": "Скіп",
     "statusPlanned": "Заплановано",
+    "statusPartial": "Частково",
+    "planOnDate": "План на {{date}}",
+    "historyOnDate": "Історія · {{date}}",
+    "noPlanOnDay": "На цей день плану не було. Обери інший день у календарі.",
+    "skippedNoDetails": "Скіп без деталей.",
+    "actual": "Факт",
+    "legendCompleted": "зроблено",
+    "legendSkipped": "скіп",
+    "legendPlanned": "заплановано",
+    "legendEmpty": "порожньо",
     "goblinHint": "Слово від Gymek",
     "seedPlan": "AI: план на сьогодні",
     "loading": "Вантажу…",
-    "nextPlanReady": "План на завтра готовий"
+    "nextPlanReady": "План на завтра готовий",
+    "plan": "План",
+    "markDone": "Позначити виконаним",
+    "exerciseInfo": "Опис вправи",
+    "noDescription": "Опис поки порожній — згенеруй новий план.",
+    "actualWeight": "Вага (факт)",
+    "actualReps": "Повтори",
+    "actualSets": "Підходи",
+    "exerciseNotePlaceholder": "Комент: не потягнув, болить плече…",
+    "skipDialogTitle": "Чому скіп?",
+    "skipDialogHint": "Gymek врахує це в завтрашньому плані.",
+    "skipNotePlaceholder": "Детальніше своїми словами…",
+    "confirmSkip": "Зафіксувати скіп",
+    "cancelSkip": "Скасувати",
+    "skipReasons": {
+      "tired": "Втомився",
+      "injury": "Травма / біль",
+      "time": "Нема часу",
+      "noMotivation": "Нема мотивації",
+      "soreness": "DOMS",
+      "other": "Інше"
+    }
   },
   "nutrition": {
     "title": "Харчування",
     "addMeal": "Додати",
     "describeMeal": "Що з'їв? (AI порахує)",
     "estimate": "Оцінити AI",
+    "estimating": "Думаю…",
     "saveMeal": "Зберегти",
     "totals": "Разом за день",
     "calories": "ккал",
@@ -86,6 +138,7 @@
   "common": {
     "kg": "кг",
     "save": "Зберегти",
+    "saving": "Зберігаю…",
     "loading": "Вантажу…",
     "error": "Щось пішло не так"
   },
@@ -117,6 +170,7 @@
     "planGenerated": "План готовий.",
     "summaryGenerated": "Вечірній розбір готовий.",
     "photoUploaded": "Фото завантажено.",
-    "signedOut": "Вийшов."
+    "signedOut": "Вийшов.",
+    "settingsSaved": "Налаштування збережено."
   }
 }

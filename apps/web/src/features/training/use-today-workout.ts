@@ -1,5 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { clientEnv } from "@/lib/client-env";
+import type { ExerciseLogDraft } from "@/components/training/exercise-session-list";
+import type { SkipReasonCode } from "@/components/training/skip-workout-dialog";
 import { useAuth } from "@/features/auth/auth-provider";
 
 export type WorkoutExercise = {
@@ -7,6 +9,10 @@ export type WorkoutExercise = {
   exercise_name: string;
   target_sets: number | null;
   target_reps: string | null;
+  target_weight_kg: number | null;
+  target_muscle: string | null;
+  exercise_description: string | null;
+  coaching_tip: string | null;
   sort_order: number;
 };
 
@@ -18,6 +24,34 @@ export type WorkoutPlan = {
   plan_date: string;
   workout_exercises: WorkoutExercise[];
 };
+
+export type SessionPayload = {
+  workoutPlanId: string;
+  status: "completed" | "skipped" | "partial";
+  note?: string;
+  skipReasonCode?: SkipReasonCode;
+  exerciseLogs?: Array<{
+    workoutExerciseId: string;
+    completed: boolean;
+    actualWeightKg?: number | null;
+    actualReps?: string;
+    actualSets?: number;
+    note?: string;
+  }>;
+};
+
+export function toSessionExerciseLogs(logs: ExerciseLogDraft[]) {
+  return logs.map((log) => ({
+    workoutExerciseId: log.workoutExerciseId,
+    completed: log.completed,
+    actualWeightKg:
+      log.actualWeightKg.trim() === "" ? null : Number(log.actualWeightKg),
+    actualReps: log.actualReps.trim() || undefined,
+    actualSets:
+      log.actualSets.trim() === "" ? undefined : Number(log.actualSets),
+    note: log.note.trim() || undefined,
+  }));
+}
 
 export const useTodayWorkout = () => {
   const { session } = useAuth();
@@ -44,6 +78,7 @@ export const useWorkoutActions = () => {
 
   const invalidate = () => {
     void queryClient.invalidateQueries({ queryKey: ["workout-today", userId] });
+    void queryClient.invalidateQueries({ queryKey: ["workout-day", userId] });
     void queryClient.invalidateQueries({ queryKey: ["calendar-plans", userId] });
     void queryClient.invalidateQueries({ queryKey: ["dashboard-summary", userId] });
   };
@@ -64,10 +99,7 @@ export const useWorkoutActions = () => {
   });
 
   const sessionMutation = useMutation({
-    mutationFn: async (payload: {
-      workoutPlanId: string;
-      status: "completed" | "skipped";
-    }) => {
+    mutationFn: async (payload: SessionPayload) => {
       const response = await fetch(`${clientEnv.VITE_API_BASE_URL}/workouts/session`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -75,6 +107,9 @@ export const useWorkoutActions = () => {
           userId,
           workoutPlanId: payload.workoutPlanId,
           status: payload.status,
+          note: payload.note,
+          skipReasonCode: payload.skipReasonCode,
+          exerciseLogs: payload.exerciseLogs,
         }),
       });
       if (!response.ok) {
