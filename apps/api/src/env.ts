@@ -7,6 +7,7 @@ const envSchema = z.object({
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
   OPENAI_API_KEY: z.string().min(1),
   GEMINI_API_KEY: z.string().min(1).optional(),
+  GEMINI_PROJECT_NUMBER: z.string().optional(),
 });
 
 export const env = envSchema.parse(process.env);

@@ -33,6 +33,17 @@ Apply SQL files from `supabase/migrations` in strict filename order:
 
 All domain tables are protected with `RLS` (`auth.uid() = user_id` style policies).
 
+## Google OAuth setup
+
+See [docs/GOOGLE_OAUTH_SUPABASE.md](docs/GOOGLE_OAUTH_SUPABASE.md).
+
+## Hosting note
+
+GitHub Pages hosts **static files only**. It cannot run Express API or TanStack Start SSR/Nitro server.
+Recommended split:
+- Web static build → GitHub Pages (or Cloudflare Pages)
+- API → Railway / Render / Fly.io / Cloudflare Workers
+
 ## Current status
 
 - Bootstrap complete for monorepo, auth baseline, and onboarding persistence.
