@@ -1,0 +1,50 @@
+{
+  "app": {
+    "tagline": "Адаптивний AI-коуч. Без wellness-ніжок.",
+    "checkingSession": "Перевіряю сесію…"
+  },
+  "auth": {
+    "continueGoogle": "Увійти через Google",
+    "loggedAs": "Залогінений як",
+    "signOut": "Вийти"
+  },
+  "onboarding": {
+    "goal": "Ціль",
+    "goalPlaceholder": "рекомпозиція",
+    "aiTone": "Тон AI",
+    "locale": "Мова",
+    "save": "Зберегти профіль",
+    "saving": "Зберігаю…",
+    "saved": "Збережено. Погнали.",
+    "failed": "Не збереглось."
+  },
+  "tones": {
+    "goblin": "Гоблін",
+    "bro": "Бро",
+    "chill": "Чілл",
+    "science": "Наука"
+  },
+  "nav": {
+    "dashboard": "Головна",
+    "training": "Тренування",
+    "nutrition": "Харчування",
+    "progress": "Прогрес"
+  },
+  "dashboard": {
+    "today": "Сьогодні",
+    "noWorkout": "На сьогодні плану немає. Йди в тренування.",
+    "openTraining": "До тренування"
+  },
+  "training": {
+    "title": "Тренування",
+    "todayPlan": "План на сьогодні",
+    "complete": "Завершити",
+    "skip": "Скіпнути",
+    "statusCompleted": "Зроблено",
+    "statusSkipped": "Скіп",
+    "statusPlanned": "Заплановано",
+    "goblinHint": "Слово від Gymek",
+    "seedPlan": "Згенерити план на сьогодні",
+    "loading": "Вантажу план…"
+  }
+}

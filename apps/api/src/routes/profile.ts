@@ -11,6 +11,30 @@ const upsertProfileSchema = z.object({
 
 export const profileRouter = Router();
 
+profileRouter.get("/:userId", async (req, res, next) => {
+  try {
+    const userId = z.string().uuid().parse(req.params.userId);
+
+    const { data, error } = await supabaseAdmin
+      .from("profiles")
+      .select("*")
+      .eq("id", userId)
+      .maybeSingle();
+
+    if (error) {
+      throw error;
+    }
+
+    if (!data) {
+      return res.status(404).json({ error: "PROFILE_NOT_FOUND" });
+    }
+
+    res.json({ profile: data });
+  } catch (error) {
+    next(error);
+  }
+});
+
 profileRouter.post("/upsert", async (req, res, next) => {
   try {
     const payload = upsertProfileSchema.parse(req.body);
@@ -23,6 +47,7 @@ profileRouter.post("/upsert", async (req, res, next) => {
           locale: payload.locale,
           ai_tone: payload.aiTone,
           training_goal: payload.trainingGoal,
+          onboarding_completed: true,
           updated_at: new Date().toISOString(),
         },
         { onConflict: "id" },

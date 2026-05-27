@@ -6,6 +6,7 @@ import { ZodError } from "zod";
 import { corsOrigins, env, listenPort } from "./env.js";
 import { healthRouter } from "./routes/health.js";
 import { profileRouter } from "./routes/profile.js";
+import { workoutsRouter } from "./routes/workouts.js";
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.get("/", (_req, res) => {
 
 app.use("/health", healthRouter);
 app.use("/profile", profileRouter);
+app.use("/workouts", workoutsRouter);
 
 app.use((error: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   if (error instanceof ZodError) {

@@ -1,0 +1,50 @@
+{
+  "app": {
+    "tagline": "Adaptive AI coach. Not wellness fluff.",
+    "checkingSession": "Checking session…"
+  },
+  "auth": {
+    "continueGoogle": "Continue with Google",
+    "loggedAs": "Logged in as",
+    "signOut": "Sign out"
+  },
+  "onboarding": {
+    "goal": "Goal",
+    "goalPlaceholder": "recomposition",
+    "aiTone": "AI tone",
+    "locale": "Language",
+    "save": "Save profile",
+    "saving": "Saving…",
+    "saved": "Saved. Let's go.",
+    "failed": "Failed to save."
+  },
+  "tones": {
+    "goblin": "Goblin",
+    "bro": "Bro",
+    "chill": "Chill",
+    "science": "Science"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "training": "Training",
+    "nutrition": "Nutrition",
+    "progress": "Progress"
+  },
+  "dashboard": {
+    "today": "Today",
+    "noWorkout": "No plan for today. Open training to generate one.",
+    "openTraining": "Open training"
+  },
+  "training": {
+    "title": "Training",
+    "todayPlan": "Today's plan",
+    "complete": "Complete",
+    "skip": "Skip",
+    "statusCompleted": "Done",
+    "statusSkipped": "Skipped",
+    "statusPlanned": "Planned",
+    "goblinHint": "Word from Gymek",
+    "seedPlan": "Generate today's plan",
+    "loading": "Loading plan…"
+  }
+}

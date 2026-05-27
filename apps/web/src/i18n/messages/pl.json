@@ -1,0 +1,50 @@
+{
+  "app": {
+    "tagline": "Adaptacyjny AI coach. Bez wellnessowego cringe.",
+    "checkingSession": "Sprawdzam sesję…"
+  },
+  "auth": {
+    "continueGoogle": "Zaloguj przez Google",
+    "loggedAs": "Zalogowany jako",
+    "signOut": "Wyloguj"
+  },
+  "onboarding": {
+    "goal": "Cel",
+    "goalPlaceholder": "rekompozycja",
+    "aiTone": "Ton AI",
+    "locale": "Język",
+    "save": "Zapisz profil",
+    "saving": "Zapisuję…",
+    "saved": "Zapisane. Jedziemy.",
+    "failed": "Nie udało się zapisać."
+  },
+  "tones": {
+    "goblin": "Goblin",
+    "bro": "Bro",
+    "chill": "Chill",
+    "science": "Nauka"
+  },
+  "nav": {
+    "dashboard": "Panel",
+    "training": "Trening",
+    "nutrition": "Dieta",
+    "progress": "Postęp"
+  },
+  "dashboard": {
+    "today": "Dziś",
+    "noWorkout": "Brak planu na dziś. Wejdź w trening.",
+    "openTraining": "Otwórz trening"
+  },
+  "training": {
+    "title": "Trening",
+    "todayPlan": "Plan na dziś",
+    "complete": "Ukończ",
+    "skip": "Pomiń",
+    "statusCompleted": "Zrobione",
+    "statusSkipped": "Pominięte",
+    "statusPlanned": "Zaplanowane",
+    "goblinHint": "Słowo od Gymek",
+    "seedPlan": "Wygeneruj plan na dziś",
+    "loading": "Ładuję plan…"
+  }
+}

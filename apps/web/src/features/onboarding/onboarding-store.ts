@@ -1,9 +1,11 @@
+import type { Locale } from "@gymek/shared";
 import { create } from "zustand";
+import { defaultLocale } from "@/i18n";
 
 type OnboardingDraft = {
   trainingGoal: string;
   aiTone: "goblin" | "bro" | "chill" | "science";
-  locale: "ru" | "uk" | "en" | "pl";
+  locale: Locale;
 };
 
 type OnboardingState = {
@@ -15,7 +17,7 @@ type OnboardingState = {
 const initialDraft: OnboardingDraft = {
   trainingGoal: "recomposition",
   aiTone: "goblin",
-  locale: "ru",
+  locale: defaultLocale,
 };
 
 export const useOnboardingStore = create<OnboardingState>((set) => ({

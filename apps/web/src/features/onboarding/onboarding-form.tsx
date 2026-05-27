@@ -1,8 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import type { Locale } from "@gymek/shared";
+import { localeLabels } from "@/i18n";
 import { clientEnv } from "@/lib/client-env";
+import { useLocale, useMessages } from "@/features/i18n/use-messages";
 import { useAuth } from "../auth/auth-provider";
 import { useOnboardingStore } from "./onboarding-store";
 
@@ -15,13 +20,24 @@ const onboardingSchema = z.object({
 type OnboardingFormValues = z.infer<typeof onboardingSchema>;
 
 export function OnboardingForm() {
+  const t = useMessages();
+  const navigate = useNavigate();
   const { session } = useAuth();
   const { draft, setDraft } = useOnboardingStore();
+  const { locale, setLocale } = useLocale();
 
   const form = useForm<OnboardingFormValues>({
     resolver: zodResolver(onboardingSchema),
-    defaultValues: draft,
+    defaultValues: { ...draft, locale },
   });
+
+  const watchedLocale = form.watch("locale");
+
+  useEffect(() => {
+    if (watchedLocale) {
+      setLocale(watchedLocale);
+    }
+  }, [watchedLocale, setLocale]);
 
   const saveMutation = useMutation({
     mutationFn: async (values: OnboardingFormValues) => {
@@ -48,6 +64,8 @@ export function OnboardingForm() {
     },
     onSuccess: (_, values) => {
       setDraft(values);
+      setLocale(values.locale);
+      void navigate({ to: "/dashboard" });
     },
   });
 
@@ -55,49 +73,60 @@ export function OnboardingForm() {
     saveMutation.mutate(values);
   };
 
+  const toneOptions = [
+    { value: "goblin", label: t.tones.goblin },
+    { value: "bro", label: t.tones.bro },
+    { value: "chill", label: t.tones.chill },
+    { value: "science", label: t.tones.science },
+  ] as const;
+
+  const localeOptions: Locale[] = ["ru", "uk", "en", "pl"];
+
   return (
     <form className="grid gap-4" onSubmit={form.handleSubmit(onSubmit)}>
       <div className="grid gap-2">
         <label className="text-sm font-medium" htmlFor="trainingGoal">
-          Goal
+          {t.onboarding.goal}
         </label>
         <input
           className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm outline-none focus:border-zinc-500"
           id="trainingGoal"
-          placeholder="recomposition"
+          placeholder={t.onboarding.goalPlaceholder}
           {...form.register("trainingGoal")}
         />
       </div>
 
       <div className="grid gap-2">
         <label className="text-sm font-medium" htmlFor="aiTone">
-          AI tone
+          {t.onboarding.aiTone}
         </label>
         <select
           className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm outline-none focus:border-zinc-500"
           id="aiTone"
           {...form.register("aiTone")}
         >
-          <option value="goblin">Goblin</option>
-          <option value="bro">Bro</option>
-          <option value="chill">Chill</option>
-          <option value="science">Science</option>
+          {toneOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </select>
       </div>
 
       <div className="grid gap-2">
         <label className="text-sm font-medium" htmlFor="locale">
-          Locale
+          {t.onboarding.locale}
         </label>
         <select
           className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm outline-none focus:border-zinc-500"
           id="locale"
           {...form.register("locale")}
         >
-          <option value="ru">ru</option>
-          <option value="uk">uk</option>
-          <option value="en">en</option>
-          <option value="pl">pl</option>
+          {localeOptions.map((code) => (
+            <option key={code} value={code}>
+              {localeLabels[code]}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -106,12 +135,10 @@ export function OnboardingForm() {
         disabled={saveMutation.isPending}
         type="submit"
       >
-        {saveMutation.isPending ? "Saving..." : "Save onboarding"}
+        {saveMutation.isPending ? t.onboarding.saving : t.onboarding.save}
       </button>
-      {saveMutation.isError ? (
-        <p className="text-sm text-red-400">Failed to save onboarding.</p>
-      ) : null}
-      {saveMutation.isSuccess ? <p className="text-sm text-emerald-400">Saved.</p> : null}
+      {saveMutation.isError ? <p className="text-sm text-red-400">{t.onboarding.failed}</p> : null}
+      {saveMutation.isSuccess ? <p className="text-sm text-emerald-400">{t.onboarding.saved}</p> : null}
     </form>
   );
 }

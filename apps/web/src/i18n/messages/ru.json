@@ -1,0 +1,50 @@
+{
+  "app": {
+    "tagline": "Адаптивный AI-коуч. Не wellness, а нормальный зал.",
+    "checkingSession": "Проверяю сессию…"
+  },
+  "auth": {
+    "continueGoogle": "Войти через Google",
+    "loggedAs": "Залогинен как",
+    "signOut": "Выйти"
+  },
+  "onboarding": {
+    "goal": "Цель",
+    "goalPlaceholder": "рекомпозиция",
+    "aiTone": "Тон AI",
+    "locale": "Язык",
+    "save": "Сохранить профиль",
+    "saving": "Сохраняю…",
+    "saved": "Сохранено. Погнали.",
+    "failed": "Не сохранилось. Gymek в ахуе."
+  },
+  "tones": {
+    "goblin": "Гоблин",
+    "bro": "Бро",
+    "chill": "Чилл",
+    "science": "Наука"
+  },
+  "nav": {
+    "dashboard": "Главная",
+    "training": "Тренировки",
+    "nutrition": "Питание",
+    "progress": "Прогресс"
+  },
+  "dashboard": {
+    "today": "Сегодня",
+    "noWorkout": "На сегодня плана нет. Жми в тренировки — сгенерим.",
+    "openTraining": "К тренировке"
+  },
+  "training": {
+    "title": "Тренировки",
+    "todayPlan": "План на сегодня",
+    "complete": "Завершить",
+    "skip": "Скипнуть",
+    "statusCompleted": "Сделано",
+    "statusSkipped": "Скип",
+    "statusPlanned": "Запланировано",
+    "goblinHint": "Слово от Gymek",
+    "seedPlan": "Сгенерить план на сегодня",
+    "loading": "Гружу план…"
+  }
+}
