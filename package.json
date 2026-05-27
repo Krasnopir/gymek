@@ -9,6 +9,10 @@
     "dev:web": "pnpm --filter gymek-web dev",
     "dev:api": "pnpm --filter gymek-api dev",
     "build": "pnpm -r build",
+    "build:api": "pnpm --filter gymek-api build",
+    "build:web": "pnpm --filter gymek-web build",
+    "start:api": "pnpm --filter gymek-api start",
+    "start:web": "pnpm --filter gymek-web start",
     "typecheck": "pnpm -r typecheck",
     "lint": "pnpm -r lint"
   },

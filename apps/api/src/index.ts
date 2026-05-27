@@ -3,7 +3,7 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import { ZodError } from "zod";
-import { env } from "./env.js";
+import { corsOrigins, env, listenPort } from "./env.js";
 import { healthRouter } from "./routes/health.js";
 import { profileRouter } from "./routes/profile.js";
 
@@ -13,7 +13,13 @@ app.use(helmet());
 app.use(
   cors({
     credentials: true,
-    origin: env.APP_BASE_URL,
+    origin(origin, callback) {
+      if (!origin || corsOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+      callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
   }),
 );
 app.use(express.json({ limit: "2mb" }));
@@ -42,6 +48,6 @@ app.use((error: unknown, _req: express.Request, res: express.Response, _next: ex
   });
 });
 
-app.listen(env.API_PORT, () => {
-  console.log(`Gymek API running on port ${env.API_PORT}`);
+app.listen(listenPort, "0.0.0.0", () => {
+  console.log(`Gymek API running on port ${listenPort}`);
 });

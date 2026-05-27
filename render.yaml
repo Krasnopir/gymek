@@ -1,0 +1,56 @@
+# Gymek — Render Blueprint (2 Web Services)
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: gymek-api
+    runtime: node
+    region: frankfurt
+    plan: free
+    branch: main
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm build:api
+    startCommand: pnpm start:api
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "22.19.0"
+      - key: NODE_ENV
+        value: production
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_PROJECT_NUMBER
+        sync: false
+      # Set after gymek-web is live (copy RENDER_EXTERNAL_URL from web service)
+      - key: APP_BASE_URL
+        sync: false
+
+  - type: web
+    name: gymek-web
+    runtime: node
+    region: frankfurt
+    plan: free
+    branch: main
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm build:web
+    startCommand: pnpm start:web
+    envVars:
+      - key: NODE_VERSION
+        value: "22.19.0"
+      - key: NODE_ENV
+        value: production
+      - key: VITE_APP_NAME
+        value: Gymek
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: gymek-api
+          envVarKey: RENDER_EXTERNAL_URL

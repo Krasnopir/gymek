@@ -37,12 +37,14 @@ All domain tables are protected with `RLS` (`auth.uid() = user_id` style policie
 
 See [docs/GOOGLE_OAUTH_SUPABASE.md](docs/GOOGLE_OAUTH_SUPABASE.md).
 
-## Hosting note
+## Deploy on Render
 
-GitHub Pages hosts **static files only**. It cannot run Express API or TanStack Start SSR/Nitro server.
-Recommended split:
-- Web static build → GitHub Pages (or Cloudflare Pages)
-- API → Railway / Render / Fly.io / Cloudflare Workers
+Production target: **Render** (web + api).
+
+- Blueprint: [`render.yaml`](render.yaml)
+- Guide: [docs/DEPLOY_RENDER.md](docs/DEPLOY_RENDER.md)
+
+Quick: Render Dashboard → **New Blueprint** → repo `Krasnopir/gymek` → fill secrets → deploy API → deploy web → set `APP_BASE_URL` on API.
 
 ## Current status
 
